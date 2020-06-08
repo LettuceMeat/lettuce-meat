@@ -3,10 +3,15 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import {
+  AccountCircleTwoTone,
+  AddCircleTwoTone,
+  BeachAccessTwoTone
+} from '@material-ui/icons'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
-    <h1>BOILERMAKER</h1>
+    <h1>LETTUCE MEAT</h1>
     <nav>
       {isLoggedIn ? (
         <div>
@@ -19,8 +24,16 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+          <Link to="/login">
+            <AccountCircleTwoTone style={{fontSize: 50, color: 'black'}} />{' '}
+            Login
+          </Link>
+          <Link to="/signup">
+            <AddCircleTwoTone style={{fontSize: 50, color: 'black'}} /> Sign Up
+          </Link>
+          <Link to="/guest">
+            <BeachAccessTwoTone style={{fontSize: 50, color: 'black'}} /> Guest
+          </Link>
         </div>
       )}
     </nav>
