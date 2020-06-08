@@ -6,3 +6,7 @@
 export {default as Navbar} from './navbar'
 export {default as UserHome} from './user-home'
 export {Login, Signup} from './auth-form'
+export {default as Header} from './Header'
+export {default as LandingPage} from './LandingPage'
+export {default as RestaurantsView} from './RestaurantsView'
+export {default as RoomPage} from './RoomPage'
