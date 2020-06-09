@@ -1,12 +1,32 @@
 const crypto = require('crypto')
 const Sequelize = require('sequelize')
+const {UUID, UUIDV4, STRING} = Sequelize
 const db = require('../db')
 
+// uuid
+// profile picture
+// first name
+// last name
+// location (lat/long)
+// preferences
+// Messages
+// isHost
+const uuidDef = {
+  type: UUID,
+  primaryKey: true,
+  defaultValue: UUIDV4
+}
+
 const User = db.define('user', {
+  id: uuidDef,
   email: {
-    type: Sequelize.STRING,
+    type: STRING,
     unique: true,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      isEmail: true,
+      notEmpty: true
+    }
   },
   password: {
     type: Sequelize.STRING,
@@ -15,6 +35,40 @@ const User = db.define('user', {
     get() {
       return () => this.getDataValue('password')
     }
+  },
+  profilePhoto: {
+    type: STRING,
+    defaultValue: '' //add default icon url here
+  },
+  firstName: {
+    type: STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
+  lastName: {
+    type: STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
+  location: {
+    lat: {
+      type: STRING,
+      allowNull: false,
+      notEmpty: true
+    },
+    lng: {
+      type: STRING,
+      allowNull: false,
+      notEmpty: true
+    }
+  },
+  isHost: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   },
   salt: {
     type: Sequelize.STRING,
