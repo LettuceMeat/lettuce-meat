@@ -54,17 +54,15 @@ const User = db.define('user', {
       notEmpty: true
     }
   },
-  location: {
-    lat: {
-      type: STRING,
-      allowNull: false,
-      notEmpty: true
-    },
-    lng: {
-      type: STRING,
-      allowNull: false,
-      notEmpty: true
-    }
+  lat: {
+    type: STRING
+    // allowNull: false,
+    // notEmpty: true
+  },
+  lng: {
+    type: STRING
+    // allowNull: false,
+    // notEmpty: true
   },
   isHost: {
     type: Sequelize.BOOLEAN,
