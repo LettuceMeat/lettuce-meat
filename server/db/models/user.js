@@ -64,6 +64,7 @@ const User = db.define('user', {
     // allowNull: false,
     // notEmpty: true
   },
+
   isHost: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
