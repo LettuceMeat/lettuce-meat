@@ -8,6 +8,7 @@ import {
   AddCircleTwoTone,
   BeachAccessTwoTone
 } from '@material-ui/icons'
+import LandingPage from './LandingPage'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
@@ -22,19 +23,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           </a>
         </div>
       ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">
-            <AccountCircleTwoTone style={{fontSize: 50, color: 'black'}} />{' '}
-            Login
-          </Link>
-          <Link to="/signup">
-            <AddCircleTwoTone style={{fontSize: 50, color: 'black'}} /> Sign Up
-          </Link>
-          <Link to="/guest">
-            <BeachAccessTwoTone style={{fontSize: 50, color: 'black'}} /> Guest
-          </Link>
-        </div>
+        <div>{/* <LandingPage /> */}</div>
       )}
     </nav>
     <hr />

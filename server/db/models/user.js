@@ -1,6 +1,6 @@
 const crypto = require('crypto')
 const Sequelize = require('sequelize')
-const {UUID, UUIDV4, STRING} = Sequelize
+const {UUID, UUIDV4, STRING, DECIMAL} = Sequelize
 const db = require('../db')
 
 // uuid
@@ -55,12 +55,12 @@ const User = db.define('user', {
     }
   },
   lat: {
-    type: STRING
+    type: DECIMAL
     // allowNull: false,
     // notEmpty: true
   },
   lng: {
-    type: STRING
+    type: DECIMAL
     // allowNull: false,
     // notEmpty: true
   },
