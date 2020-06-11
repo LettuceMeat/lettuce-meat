@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import {
   AccountCircleTwoTone,
   AddCircleTwoTone,
@@ -10,16 +11,16 @@ const LandingPage = () => {
     <div id="landingPageWrapper">
       <img />
       <div id="icons">
-        <a href="/signin" className="icon">
+        <Link to="/login" className="icon">
           <AccountCircleTwoTone style={{fontSize: 50, color: 'white'}} /> Sign
           In
-        </a>
-        <a href="/signup" className="icon">
+        </Link>
+        <Link to="/signup" className="icon">
           <AddCircleTwoTone style={{fontSize: 50, color: 'white'}} /> Sign Up
-        </a>
-        <a href="/guest" className="icon">
+        </Link>
+        <Link to="/guest" className="icon">
           <BeachAccessTwoTone style={{fontSize: 50, color: 'white'}} /> Guest
-        </a>
+        </Link>
       </div>
     </div>
   )
