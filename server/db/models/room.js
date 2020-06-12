@@ -18,5 +18,3 @@ const Room = db.define('room', {
 })
 
 module.exports = Room
-
-// is: /^[A-Z]+$/i
