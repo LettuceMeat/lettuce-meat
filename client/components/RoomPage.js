@@ -26,7 +26,6 @@ const useStyles = makeStyles({
 })
 
 const RoomPage = () => {
-  // const [restaurants, setRestaurants] = useState([])
   const [apiSearch, restaurants] = findRestaurants()
 
   const styles = useStyles()
@@ -40,7 +39,15 @@ const RoomPage = () => {
         <GroupIcon />
         Join Room
       </Button>
-      <Button onClick={apiSearch}>Making a request</Button>
+      <Button
+        onClick={() =>
+          apiSearch(
+            'burgers' /* Just an example of how it works, we'll use this hook within a messages component with maybe an input */
+          )
+        }
+      >
+        Making a request
+      </Button>
       <div>
         {restaurants
           ? restaurants.map(restaurant => (
