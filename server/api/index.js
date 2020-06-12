@@ -1,7 +1,10 @@
 const router = require('express').Router()
+const cors = require('cors')
 module.exports = router
 
 router.use('/users', require('./users'))
+
+router.use(cors())
 
 router.use((req, res, next) => {
   const error = new Error('Not Found')
