@@ -1,11 +1,18 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Message, Preference} = require('../server/db/models')
+const {Room, User, Message, Preference} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
+
+  const [room_aflo, room_yuqs, room_admg] = await Promise.all([
+    Room.create({name: 'AFLO', lat: 40.765628, lng: -73.916954}), //astoria
+    Room.create({name: 'YUQS', lat: 40.732445, lng: -73.953338}), //greenpoint
+    Room.create({name: 'ADMG', lat: 40.70525, lng: -74.009566}) //fullstack
+  ])
+  console.log('3 rooms created')
 
   const [cody, murphy] = await Promise.all([
     User.create({
@@ -21,11 +28,14 @@ async function seed() {
       password: '123'
     })
   ])
+  console.log('2 users created')
 
   const [preference1, preference2] = await Promise.all([
     Preference.create({cuisine: 'Chinese', moneys: '$$', userId: cody.id}),
     Preference.create({cuisine: 'Italian', moneys: '$$$', userId: murphy.id})
   ])
+  console.log('2 preferences created')
+
   const [message1, message2] = await Promise.all([
     Message.create({
       content: "hey there guys, let's pick a good restaurant",
@@ -33,8 +43,7 @@ async function seed() {
     }),
     Message.create({content: "let's meet in Brooklyn", userId: murphy.id})
   ])
-
-  console.log(`seeded successfully`)
+  console.log('2 messages created')
 }
 
 // We've separated the `seed` function from the `runSeed` function.
