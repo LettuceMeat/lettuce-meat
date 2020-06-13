@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import yelp from '../../server/api/yelp'
 
 export default () => {
@@ -11,16 +11,16 @@ export default () => {
         params: {
           limit: 3,
           term: searchTerm,
-          latitude: '40.708360', //input of coordinates will
-          longitude: '-73.828640' //be inserted from users location
+          location: 'new york'
         }
       })
       setRestaurants(res.data.businesses)
     } catch (ex) {
+      console.error(ex, 'ERROR')
       setError('Something went wrong')
     }
   }
 
-  console.log(restaurants)
+  // console.log(restaurants)
   return [apiSearch, restaurants]
 }
