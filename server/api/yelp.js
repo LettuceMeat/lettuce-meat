@@ -1,12 +1,11 @@
 require('dotenv').config()
-const apiKey = process.env.YELP_API_KEY
+const apiKey = process.env.YELP_API_KEY || require('../../secrets').yelpKey
 const axios = require('axios')
 
 const yelp = axios.create({
   baseURL: `${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses`,
   headers: {
-    Authorization: `Bearer ${apiKey}`,
-    'content-type': 'application/json'
+    Authorization: `Bearer ${apiKey}`
   }
 })
 export default yelp
