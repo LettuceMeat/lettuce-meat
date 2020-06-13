@@ -1,24 +1,15 @@
 import React from 'react'
+import logo from '../../public/img/logo.jpg'
 
-const Header = () => {
+export default function Header() {
   return (
-    <div id="header">
-      <div>
-        <img />
+    <div className="header">
+      <div className="logoDiv logoFont">
+        <img src={logo} alt="" height="48" />
         <span className="spacer" />
         Lettuce Meat
-      </div>
-      <div className="spacer" />
-      <div className="loginDiv">
-        login
-        <div className="spacer" />
-        <div className="divider" />
-        <div className="spacer" />
-        SignUp
       </div>
       <div className="roomDiv">ABCD</div>
     </div>
   )
 }
-
-export default Header
