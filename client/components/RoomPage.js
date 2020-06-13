@@ -1,8 +1,10 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import {Link} from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import {makeStyles} from '@material-ui/core/styles'
 import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded'
 import GroupIcon from '@material-ui/icons/Group'
+import findRestaurants from '../hooks/findRestaurants'
 
 const useStyles = makeStyles({
   container: {
@@ -24,6 +26,8 @@ const useStyles = makeStyles({
 })
 
 const RoomPage = () => {
+  const [apiSearch, restaurants] = findRestaurants()
+
   const styles = useStyles()
   return (
     <div className={styles.container}>
@@ -35,6 +39,22 @@ const RoomPage = () => {
         <GroupIcon />
         Join Room
       </Button>
+      <Button
+        onClick={() =>
+          apiSearch(
+            'burgers' /* Just an example of how it works, we'll use this hook within a messages component with maybe an input */
+          )
+        }
+      >
+        Making a request
+      </Button>
+      <div>
+        {restaurants
+          ? restaurants.map(restaurant => (
+              <div key={restaurant.id}>{restaurant.name}</div>
+            ))
+          : null}
+      </div>
     </div>
   )
 }

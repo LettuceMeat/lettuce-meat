@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
-const {BOOLEAN, DATE, STRING, UUID, UUIDV4} = Sequelize
+const {BOOLEAN, DATE, DECIMAL, STRING, UUID, UUIDV4} = Sequelize
 
 const uuidDefinition = {
   primaryKey: true,
@@ -14,12 +14,12 @@ const Restaurant = db.define('restaurant', {
     type: STRING,
     allowNull: false
   },
-  latitude: {
-    type: STRING,
+  lat: {
+    type: DECIMAL,
     allowNull: false
   },
-  longitude: {
-    type: STRING,
+  lng: {
+    type: DECIMAL,
     allowNull: false
   },
   imageURL: {
