@@ -9,7 +9,8 @@ import {
   Header,
   LandingPage,
   RestaurantsView,
-  RoomPage
+  RoomPage,
+  Rooms
 } from './components'
 import {me} from './store'
 
@@ -33,8 +34,10 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
+            {/* TODO: rename RoomPage to HomePage */}
             <Route exact path="/home" component={RoomPage} />
             <Route exact path="/restaurants" component={RestaurantsView} />
+            <Route path="/room" component={Rooms} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
