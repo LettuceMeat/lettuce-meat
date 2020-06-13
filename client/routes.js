@@ -9,9 +9,12 @@ import {
   Header,
   LandingPage,
   RestaurantsView,
-  RoomPage
+  RoomPage,
+  ChatRoom
 } from './components'
 import {me} from './store'
+import {thunkLoadMessages, thunkCreateMessage} from './store/thunks'
+import socket from './socket'
 
 /**
  * COMPONENT
@@ -19,6 +22,9 @@ import {me} from './store'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
+    socket.on('message', message => {
+      this.props.createNewMessage(message)
+    })
   }
 
   render() {
@@ -35,6 +41,7 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/home" component={RoomPage} />
             <Route exact path="/restaurants" component={RestaurantsView} />
+            <Route exact path="/chatroom" component={ChatRoom} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
@@ -57,8 +64,12 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
+    createNewMessage: message => {
+      dispatch(thunkCreateMessage(message))
+    },
     loadInitialData() {
       dispatch(me())
+      dispatch(thunkLoadMessages())
     }
   }
 }
