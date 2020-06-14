@@ -13,7 +13,8 @@ import {
   ChatRoom
 } from './components'
 import {me} from './store'
-import {thunkLoadMessages, thunkCreateMessage} from './store/thunks'
+import {thunkLoadMessages} from './store/thunks'
+import {createMessage} from './store/actions'
 import socket from './socket'
 
 /**
@@ -23,7 +24,9 @@ class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
     socket.on('message', message => {
+      //no need to use thunk
       this.props.createNewMessage(message)
+      console.log(message)
     })
   }
 
@@ -65,7 +68,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     createNewMessage: message => {
-      dispatch(thunkCreateMessage(message))
+      dispatch(createMessage(message))
     },
     loadInitialData() {
       dispatch(me())

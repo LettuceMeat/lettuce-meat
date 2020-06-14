@@ -10,11 +10,12 @@ const messageReducer = (state = [], action) => {
     case LOAD_MESSAGES:
       return action.messages
     case CREATE_MESSAGE:
-      console.log(action, 'HERES THE ACTION')
-      if (state.find(message => message.id === action.message.id)) {
+      //console.log(action.message, 'REDUCER')
+      if (state.some(message => message.id === action.message.id)) {
+        //console.log(state, 'STATE')
         return state
       }
-      return [action.message, ...state]
+      return [...state, action.message]
     default:
       return state
   }
