@@ -10,9 +10,13 @@ import {
   LandingPage,
   RestaurantsView,
   RoomPage,
-  Rooms
+  Rooms,
+  ChatRoom
 } from './components'
 import {me} from './store'
+import {thunkLoadMessages} from './store/thunks'
+import {createMessage} from './store/actions'
+import socket from './socket'
 
 /**
  * COMPONENT
@@ -20,6 +24,11 @@ import {me} from './store'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
+    socket.on('message', message => {
+      //no need to use thunk
+      this.props.createNewMessage(message)
+      console.log(message)
+    })
   }
 
   render() {
@@ -37,7 +46,8 @@ class Routes extends Component {
             {/* TODO: rename RoomPage to HomePage */}
             <Route exact path="/home" component={RoomPage} />
             <Route exact path="/restaurants" component={RestaurantsView} />
-            <Route path="/room" component={Rooms} />
+            <Route exact path="/room" component={Rooms} />
+            <Route exact path="/chatroom" component={ChatRoom} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
@@ -60,8 +70,12 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
+    createNewMessage: message => {
+      dispatch(createMessage(message))
+    },
     loadInitialData() {
       dispatch(me())
+      dispatch(thunkLoadMessages())
     }
   }
 }
