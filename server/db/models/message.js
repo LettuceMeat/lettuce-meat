@@ -19,16 +19,15 @@ const Message = db.define(
   {
     hooks: {
       afterCreate: function(message) {
-        //io.emit('message', message);
-        // return message.reload({
-        //   include: [ db.models.user ]
-        // })
-        // .then( message => {
-        //   // console.log(message)
-        if (socket.getIO()) {
-          socket.getIO().emit('message', message)
-        }
-        //     });
+        return message
+          .reload({
+            include: [db.models.user]
+          })
+          .then(message => {
+            if (socket.getIO()) {
+              socket.getIO().emit('message', message)
+            }
+          })
       }
     }
   }

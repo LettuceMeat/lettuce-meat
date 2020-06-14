@@ -25,23 +25,33 @@ export const ChatRoom = props => {
       <Container maxWidth="sm">
         <Typography component="div" style={{backgroundColor: '#cfe8fc'}}>
           <div id="chatBox">
-            <ul className="chatList">
+            <ul>
               {messages
                 ? messages.map(message => {
                     return (
-                      <li
-                        key={message.id}
-                        className={
-                          loggedUser.id === message.userId
-                            ? 'textRight'
-                            : 'textLeft'
-                        }
-                      >
-                        {message.content} -{' '}
-                        {
-                          //message.user.firstName
-                        }
-                      </li>
+                      <div className="chatList">
+                        <li
+                          key={message.id}
+                          className={
+                            loggedUser.id === message.userId
+                              ? 'textRight'
+                              : 'textLeft'
+                          }
+                        >
+                          {message.content}
+                        </li>
+                        <div
+                          id="textAvatar"
+                          key={message.id}
+                          className={
+                            loggedUser.id === message.userId
+                              ? 'avatarRight'
+                              : 'avatarLeft'
+                          }
+                        >
+                          {message.user.firstName}
+                        </div>
+                      </div>
                     )
                   })
                 : null}

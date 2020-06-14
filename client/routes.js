@@ -27,7 +27,6 @@ class Routes extends Component {
     socket.on('message', message => {
       //no need to use thunk
       this.props.createNewMessage(message)
-      console.log(message)
     })
   }
 

@@ -13,12 +13,6 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-// router.post('/', (req, res, next) => {
-//   Message.create({...req.body, userId: req.user.id})
-//     .then(message => message.reload({include: [User]}))
-//     .then(message => res.send(message))
-//     .catch(next)
-// })
 router.post('/', async (req, res, next) => {
   try {
     const message = await Message.create({...req.body, userId: req.user.id})
