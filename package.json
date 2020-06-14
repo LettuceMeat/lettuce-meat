@@ -52,6 +52,7 @@
     "express": "^4.17.1",
     "express-session": "^1.15.1",
     "fs": "0.0.1-security",
+    "google-maps-react": "^2.0.6",
     "history": "^4.9.0",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",

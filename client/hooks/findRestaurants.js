@@ -5,22 +5,24 @@ export default () => {
   const [restaurants, setRestaurants] = useState([])
   const [error, setError] = useState('')
 
-  const apiSearch = async searchTerm => {
+  const apiSearch = async search => {
     try {
       const res = await yelp.get('/search', {
         params: {
-          limit: 3,
-          term: searchTerm,
-          location: 'new york'
+          limit: search.limit || 10,
+          categories: search.categories || '',
+          latitude: search.latitude || 0,
+          longitude: search.longitude || 0,
+          radius: 1500
         }
       })
       setRestaurants(res.data.businesses)
+      return res.data.businesses
     } catch (ex) {
       console.error(ex, 'ERROR')
       setError('Something went wrong')
     }
   }
 
-  // console.log(restaurants)
   return [apiSearch, restaurants]
 }
