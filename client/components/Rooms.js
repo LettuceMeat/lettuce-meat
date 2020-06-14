@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import findRestaurants from '../hooks/findRestaurants'
 import {CATEGORIES} from '../constants/categoryPreferences'
 import findLocation from '../hooks/getLocation'
+import RestaurantCard from './RestaurantCard'
 
 const Rooms = () => {
   const [category, setCategory] = useState('')
@@ -9,7 +10,8 @@ const Rooms = () => {
   const [getLocation, location] = findLocation()
   const submit = ev => {
     ev.preventDefault()
-
+    console.log('You are here:', location.latitude, location.longitude)
+    console.log('You should be here: 40.7763571 -73.9242136')
     const searchObj = {
       categories: category,
       latitude: location.latitude,
@@ -39,7 +41,7 @@ const Rooms = () => {
       <div>
         {restaurants
           ? restaurants.map((restaurant, idx) => (
-              <div key={idx}>{restaurant.name}</div>
+              <RestaurantCard key={idx} restaurant={restaurant} />
             ))
           : null}
       </div>
