@@ -7,6 +7,7 @@ const useStyles = makeStyles(theme => ({
   },
   root: {
     border: 'solid black 1px',
+    margin: '1em',
     display: 'flex',
     '& > *': {
       margin: theme.spacing(1)
@@ -16,7 +17,6 @@ const useStyles = makeStyles(theme => ({
 
 const RestaurantCard = ({restaurant}) => {
   const styles = useStyles()
-  console.log(restaurant)
   return (
     <div className={styles.root}>
       <div>{restaurant.name}</div>
