@@ -45,7 +45,7 @@ class Routes extends Component {
             {/* TODO: rename RoomPage to HomePage */}
             <Route exact path="/home" component={RoomPage} />
             <Route exact path="/restaurants" component={RestaurantsView} />
-            <Route exact path="/room" component={Rooms} />
+            <Route exact path="/room/:roomId?" component={Rooms} />
             <Route exact path="/chatroom" component={ChatRoom} />
           </Switch>
         )}
