@@ -5,6 +5,8 @@ import {makeStyles} from '@material-ui/core/styles'
 import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded'
 import GroupIcon from '@material-ui/icons/Group'
 import findRestaurants from '../hooks/findRestaurants'
+import {generateRoomCode} from '../../script/utils'
+import history from '../history'
 
 const useStyles = makeStyles({
   container: {
@@ -29,9 +31,16 @@ const RoomPage = () => {
   const [apiSearch, restaurants] = findRestaurants()
 
   const styles = useStyles()
+
+  const createRoom = () => {
+    const roomCode = generateRoomCode()
+    //check here to make sure room code is unique
+    history.push(`/room/${roomCode}`)
+  }
+
   return (
     <div className={styles.container}>
-      <Button className={styles.createButtonStyle}>
+      <Button className={styles.createButtonStyle} onClick={() => createRoom()}>
         <AddCircleOutlineRoundedIcon />
         Create Room
       </Button>
