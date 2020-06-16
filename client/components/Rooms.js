@@ -5,6 +5,7 @@ import findLocation from '../hooks/getLocation'
 import RestaurantCard from './RestaurantCard'
 import GoogleMapCard from './GoogleMapCard'
 import {makeStyles} from '@material-ui/core/styles'
+import {useParams} from 'react-router-dom'
 // import GoogleApiWrapper from './maps';
 // import {Map} from 'google-maps-react';
 
@@ -44,6 +45,7 @@ const useStyles = makeStyles({
 
 const Rooms = () => {
   const styles = useStyles()
+  const {roomId} = useParams()
 
   const [category, setCategory] = useState('')
   const [apiSearch, restaurants] = findRestaurants()
@@ -65,7 +67,7 @@ const Rooms = () => {
 
   return (
     <div>
-      <div className={styles.root}>asdf</div>
+      <div className={styles.root}>{`you are in room: ${roomId}`}</div>
       <form>
         <select onChange={ev => setCategory(ev.target.value)}>
           {CATEGORIES.map((category, idx) => {
