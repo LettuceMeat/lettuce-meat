@@ -31,13 +31,22 @@ class GoogleMapCard extends Component {
           markerData.map(restaurant => {
             const {latitude, longitude} = restaurant.coordinates
             const coordinates = {lat: latitude, lng: longitude}
-            console.log('in map marker', restaurant.name, coordinates)
-            return <Marker name={restaurant.name} position={coordinates} />
+            return (
+              <Marker
+                key={restaurant.id}
+                title={restaurant.name}
+                name={restaurant.name}
+                position={coordinates}
+                icon={{
+                  url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+                }}
+              />
+            )
           })}
         {/* <InfoWindow onClose={this.onInfoWindowClose}>
           <div>
-                    <h1>{this.state.selectedPlace.name}</h1>
-                    </div>
+            <h1>{this.state.selectedPlace.name}</h1>
+          </div>
         </InfoWindow> */}
       </Map>
     )
@@ -45,5 +54,5 @@ class GoogleMapCard extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: googleKey
+  apiKey: 'AIzaSyC_maBtBW0i3hgIDLtTm95C7jf714s57AU'
 })(GoogleMapCard)
