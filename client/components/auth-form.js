@@ -3,33 +3,78 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
 
+import {makeStyles} from '@material-ui/core/styles'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+import Link from '@material-ui/core/Link'
+
 /**
  * COMPONENT
  */
+
+const useStyles = makeStyles({
+  loginForm: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignContent: 'center'
+  },
+  label: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: 5
+  }
+})
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
+  const styles = useStyles()
 
   return (
-    <div>
+    <div className={styles.loginForm}>
       <form onSubmit={handleSubmit} name={name}>
         <div>
-          <label htmlFor="email">
+          <label htmlFor="email" className={styles.label}>
             <small>Email</small>
           </label>
-          <input name="email" type="text" />
+          <div className={styles.label}>
+            <TextField
+              id="standard-email-input"
+              label="Email"
+              variant="outlined"
+              name="email"
+              type="text"
+              margin="dense"
+            />
+          </div>
         </div>
         <div>
-          <label htmlFor="password">
+          <label htmlFor="password" className={styles.label}>
             <small>Password</small>
           </label>
-          <input name="password" type="password" />
+          <div className={styles.label}>
+            <TextField
+              id="standard-password-input"
+              label="Password"
+              variant="outlined"
+              name="password"
+              type="password"
+              margin="dense"
+            />
+          </div>
         </div>
-        <div>
-          <button type="submit">{displayName}</button>
+        <div className={styles.label}>
+          <Button type="submit" color="primary">
+            {displayName}
+          </Button>
+          {/* <button type="submit">{displayName}</button> */}
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <a href="/auth/google">{displayName} with Google</a>
+      <Link href="/auth/google" component="button" variant="body2">
+        {displayName} with Google
+      </Link>
+      {/* <a href="/auth/google">{displayName} with Google</a> */}
     </div>
   )
 }
