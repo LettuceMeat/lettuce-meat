@@ -1,8 +1,6 @@
 require('dotenv').config()
 const {yelpKey} = require('../../secrets')
 const apiKey = process.env.YELP_API_KEY || yelpKey
-console.log('apiKey', apiKey)
-console.log('yelpKey', yelpKey)
 const axios = require('axios')
 
 const yelp = axios.create({
