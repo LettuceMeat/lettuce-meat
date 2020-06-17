@@ -6,6 +6,7 @@ import RestaurantCard from './RestaurantCard'
 import GoogleMapCard from './GoogleMapCard'
 import {makeStyles} from '@material-ui/core/styles'
 import {useParams} from 'react-router-dom'
+import Phase1BottomNav from './Phase1BottomNav'
 // import GoogleApiWrapper from './maps';
 // import {Map} from 'google-maps-react';
 
@@ -98,6 +99,7 @@ const Rooms = () => {
             ))
           : null}
       </div>
+      <Phase1BottomNav />
     </div>
   )
 }
