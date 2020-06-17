@@ -83,31 +83,35 @@ code {
   margin-top: 50px;
 }
 #landingPageWrapper {
+  display: flex;
+  justify-content: center;
   align-items: center;
   background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
   color: white;
-  display: flex;
-  flex-direction: column;
+  height: 100vh;
 }
 #icons > a:link,
 a:visited,
 a:hover,
 a:active {
-  color: black;
+  color: white;
   text-decoration: none;
 }
 #icons {
+  align-items: center;
   display: flex;
-  margin: 20px;
-  margin-top: 100px;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 40%;
 }
 .icon {
   align-items: center;
+  justify-content: center;
   display: flex;
   flex-direction: column;
   margin: 5px;
   padding: 5px;
-  width: 30%px;
 }
 .chatList {
   display: flex;

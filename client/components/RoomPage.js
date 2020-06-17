@@ -12,14 +12,14 @@ const useStyles = makeStyles({
   container: {
     alignContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#eb5234',
+    background: 'linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%)',
     display: 'flex',
     flexDirection: 'row',
     height: '100vh',
     justifyContent: 'center'
   },
   createButtonStyle: {
-    backgroundColor: '#eb5234',
+    background: 'linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%)',
     border: 0,
     color: 'white',
     fontSize: 'large',
