@@ -11,7 +11,8 @@ import {
   RestaurantsView,
   RoomPage,
   Rooms,
-  ChatRoom
+  ChatRoom,
+  Chat
 } from './components'
 import {me} from './store'
 import {thunkLoadMessages} from './store/thunks'
@@ -39,13 +40,13 @@ class Routes extends Component {
         <Route exact path="/" component={LandingPage} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route path="/room/:roomId?" component={Chat} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             {/* TODO: rename RoomPage to HomePage */}
             <Route exact path="/home" component={RoomPage} />
             <Route exact path="/restaurants" component={RestaurantsView} />
-            <Route exact path="/room/:roomId?" component={Rooms} />
             <Route exact path="/chatroom" component={ChatRoom} />
           </Switch>
         )}
