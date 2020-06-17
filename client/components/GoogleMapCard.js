@@ -1,26 +1,19 @@
 import React, {Component} from 'react'
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react'
+import {Map, Marker, GoogleApiWrapper} from 'google-maps-react'
 import {googleKey} from '../../secrets'
 
 class GoogleMapCard extends Component {
   constructor() {
     super()
-    this.state = {
-      // latitude: props.latitude,
-      // longitude: props.longitude
-    }
+    this.state = {}
   }
 
   render() {
-    console.log('props here', this.props)
     const {latitude, longitude, markerData} = this.props
-    console.log('render restaurants', markerData)
     return (
       <Map
         google={this.props.google}
         initialCenter={{
-          // lat: 40.7763571,
-          // lng: -73.9242136,
           lat: latitude,
           lng: longitude
         }}
@@ -43,16 +36,11 @@ class GoogleMapCard extends Component {
               />
             )
           })}
-        {/* <InfoWindow onClose={this.onInfoWindowClose}>
-          <div>
-            <h1>{this.state.selectedPlace.name}</h1>
-          </div>
-        </InfoWindow> */}
       </Map>
     )
   }
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyC_maBtBW0i3hgIDLtTm95C7jf714s57AU'
+  apiKey: googleKey
 })(GoogleMapCard)
