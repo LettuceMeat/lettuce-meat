@@ -12,14 +12,14 @@ const LandingPage = () => {
       <img />
       <div id="icons">
         <Link to="/login" className="icon">
-          <AccountCircleTwoTone style={{fontSize: 50, color: 'white'}} /> Sign
+          <AccountCircleTwoTone style={{fontSize: 100, color: 'white'}} /> Sign
           In
         </Link>
         <Link to="/signup" className="icon">
-          <AddCircleTwoTone style={{fontSize: 50, color: 'white'}} /> Sign Up
+          <AddCircleTwoTone style={{fontSize: 100, color: 'white'}} /> Sign Up
         </Link>
         <Link to="/guest" className="icon">
-          <BeachAccessTwoTone style={{fontSize: 50, color: 'white'}} /> Guest
+          <BeachAccessTwoTone style={{fontSize: 100, color: 'white'}} /> Guest
         </Link>
       </div>
     </div>
