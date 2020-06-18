@@ -25,6 +25,10 @@ import {createMessage} from './store/actions'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
+    // socket.on('message', message => {
+    //   //no need to use thunk
+    //   this.props.createNewMessage(message)
+    // })
   }
 
   render() {
