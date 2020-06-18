@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react'
+import {Map, Marker, GoogleApiWrapper} from 'google-maps-react'
 import {googleKey} from '../../secrets'
 
 class GoogleMapCard extends Component {
@@ -12,15 +12,11 @@ class GoogleMapCard extends Component {
   }
 
   render() {
-    console.log('props here', this.props)
     const {latitude, longitude, markerData} = this.props
-    console.log('render restaurants', markerData)
     return (
       <Map
         google={this.props.google}
         initialCenter={{
-          // lat: 40.7763571,
-          // lng: -73.9242136,
           lat: latitude,
           lng: longitude
         }}
@@ -31,14 +27,8 @@ class GoogleMapCard extends Component {
           markerData.map(restaurant => {
             const {latitude, longitude} = restaurant.coordinates
             const coordinates = {lat: latitude, lng: longitude}
-            console.log('in map marker', restaurant.name, coordinates)
             return <Marker name={restaurant.name} position={coordinates} />
           })}
-        {/* <InfoWindow onClose={this.onInfoWindowClose}>
-          <div>
-                    <h1>{this.state.selectedPlace.name}</h1>
-                    </div>
-        </InfoWindow> */}
       </Map>
     )
   }
