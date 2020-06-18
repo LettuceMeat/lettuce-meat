@@ -29,9 +29,8 @@ export const ChatRoom = props => {
               {messages
                 ? messages.map(message => {
                     return (
-                      <div className="chatList">
+                      <div className="chatList" key={message.id}>
                         <li
-                          key={message.id}
                           className={
                             loggedUser.id === message.userId
                               ? 'textRight'

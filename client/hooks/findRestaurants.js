@@ -19,10 +19,13 @@ export default () => {
       setRestaurants(res.data.businesses)
       return res.data.businesses
     } catch (ex) {
-      console.error(ex, 'ERROR')
+      console.error(ex, 'ERROR IN YELP')
       setError('Something went wrong')
     }
   }
+  useEffect(() => {
+    apiSearch('pasta')
+  }, [])
 
-  return [apiSearch, restaurants]
+  return [apiSearch, restaurants, error]
 }

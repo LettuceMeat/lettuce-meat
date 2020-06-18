@@ -11,7 +11,8 @@ import {
   RestaurantsView,
   RoomPage,
   Rooms,
-  ChatRoom
+  ChatRoom,
+  NewRoomHome
 } from './components'
 import {me} from './store'
 import {thunkLoadMessages} from './store/thunks'
@@ -47,6 +48,7 @@ class Routes extends Component {
             <Route exact path="/restaurants" component={RestaurantsView} />
             <Route exact path="/room/:roomId?" component={Rooms} />
             <Route exact path="/chatroom" component={ChatRoom} />
+            <Route exact path="/roomhome" component={NewRoomHome} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
