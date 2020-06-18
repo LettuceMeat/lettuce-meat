@@ -5,10 +5,7 @@ import {googleKey} from '../../secrets'
 class GoogleMapCard extends Component {
   constructor() {
     super()
-    this.state = {
-      // latitude: props.latitude,
-      // longitude: props.longitude
-    }
+    this.state = {}
   }
 
   render() {
@@ -22,12 +19,22 @@ class GoogleMapCard extends Component {
         }}
         zoom={14}
       >
-        <Marker onClick={this.onMarkerClick} name="Current location" />
+        <Marker title="Current location" name="Current location" />
         {markerData &&
           markerData.map(restaurant => {
             const {latitude, longitude} = restaurant.coordinates
             const coordinates = {lat: latitude, lng: longitude}
-            return <Marker name={restaurant.name} position={coordinates} />
+            return (
+              <Marker
+                key={restaurant.id}
+                title={restaurant.name}
+                name={restaurant.name}
+                position={coordinates}
+                icon={{
+                  url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+                }}
+              />
+            )
           })}
       </Map>
     )
