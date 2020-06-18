@@ -7,7 +7,13 @@ const setup = io => {
 
     socket.on('join', (roomId, name) => {
       socket.join(roomId)
-      socket.to(roomId).emit('roomMessage', `${name} has joined`)
+      socket.to(roomId).emit('joinMessage', `${name} has joined`)
+    })
+
+    socket.on('location', (roomId, name, location) => {
+      socket
+        .to(roomId)
+        .emit('locationMessage', `${name} is at ${location[0]}, ${location[1]}`)
     })
 
     socket.on('roomMessage', (roomId, name, message) => {

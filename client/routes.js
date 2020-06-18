@@ -12,7 +12,7 @@ import {
   RoomPage,
   Rooms,
   ChatRoom,
-  Chat
+  RoomMaster
 } from './components'
 import {me} from './store'
 import {thunkLoadMessages} from './store/thunks'
@@ -36,7 +36,7 @@ class Routes extends Component {
         <Route exact path="/" component={LandingPage} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/room/:roomId?" component={Chat} />
+        <Route path="/room/:roomId?" component={RoomMaster} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
