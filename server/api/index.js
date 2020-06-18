@@ -4,6 +4,7 @@ module.exports = router
 
 router.use('/users', require('./users'))
 router.use('/messages', require('./messages'))
+router.use('/room', require('./room'))
 router.use(cors())
 
 router.use((req, res, next) => {

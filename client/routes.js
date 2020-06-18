@@ -12,12 +12,13 @@ import {
   RoomPage,
   Rooms,
   ChatRoom,
+  RoomMaster
   NewRoomHome
 } from './components'
 import {me} from './store'
 import {thunkLoadMessages} from './store/thunks'
 import {createMessage} from './store/actions'
-import socket from './socket'
+// import socket from './socket'
 
 /**
  * COMPONENT
@@ -25,10 +26,10 @@ import socket from './socket'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
-    socket.on('message', message => {
-      //no need to use thunk
-      this.props.createNewMessage(message)
-    })
+    // socket.on('message', message => {
+    //   //no need to use thunk
+    //   this.props.createNewMessage(message)
+    // })
   }
 
   render() {
@@ -40,13 +41,13 @@ class Routes extends Component {
         <Route exact path="/" component={LandingPage} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route path="/room/:roomId?" component={RoomMaster} />
+        <Route exact path="/home" component={RoomPage} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             {/* TODO: rename RoomPage to HomePage */}
-            <Route exact path="/home" component={RoomPage} />
             <Route exact path="/restaurants" component={RestaurantsView} />
-            <Route exact path="/room/:roomId?" component={Rooms} />
             <Route exact path="/chatroom" component={ChatRoom} />
             <Route exact path="/roomhome" component={NewRoomHome} />
           </Switch>
