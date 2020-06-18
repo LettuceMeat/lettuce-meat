@@ -12,7 +12,7 @@ import {
   RoomPage,
   Rooms,
   ChatRoom,
-  RoomMaster
+  RoomMaster,
   NewRoomHome
 } from './components'
 import {me} from './store'
