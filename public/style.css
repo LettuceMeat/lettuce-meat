@@ -83,31 +83,35 @@ code {
   margin-top: 50px;
 }
 #landingPageWrapper {
-  align-items: center;
-  background-color: #c4542b;
-  color: white;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
+  color: white;
+  height: 100vh;
 }
 #icons > a:link,
 a:visited,
 a:hover,
 a:active {
-  color: black;
+  color: white;
   text-decoration: none;
 }
 #icons {
+  align-items: center;
   display: flex;
-  margin: 20px;
-  margin-top: 100px;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 40%;
 }
 .icon {
   align-items: center;
+  justify-content: center;
   display: flex;
   flex-direction: column;
   margin: 5px;
   padding: 5px;
-  width: 30%px;
 }
 .chatList {
   display: flex;
@@ -149,4 +153,34 @@ a:active {
   margin: -10px 10px 10px -35px;
   list-style-type: none;
   padding: 5px 15px 5px 15px;
+}
+.bottomNav {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0 20px 0;
+}
+#codeHomeWrapper {
+  background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
+  height: 100vh;
+}
+#roomCodeContainer > button {
+  background-color: white;
+  height: 40px;
+  margin-bottom: 20px;
+}
+textarea {
+  margin-bottom: 20px;
+  resize: none;
+  text-align: center;
+  width: 300px;
+}
+#roomCodeContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+#roomCodeContainer {
+  color: white;
 }
