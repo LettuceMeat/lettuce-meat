@@ -6,6 +6,7 @@ const setup = io => {
     console.log(`A socket connection to the server has been made: ${socket.id}`)
 
     socket.on('join', (roomId, name) => {
+      //put request the user belongsTo(roomId)
       socket.join(roomId)
       socket.to(roomId).emit('joinMessage', `${name} has joined`)
     })
@@ -21,6 +22,7 @@ const setup = io => {
     })
 
     socket.on('disconnect', () => {
+      //put request the user DOES NOT belongsTo(roomId)
       console.log(`Connection ${socket.id} has left the building`)
     })
   })

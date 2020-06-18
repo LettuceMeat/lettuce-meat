@@ -37,11 +37,11 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/room/:roomId?" component={RoomMaster} />
+        <Route exact path="/home" component={RoomPage} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             {/* TODO: rename RoomPage to HomePage */}
-            <Route exact path="/home" component={RoomPage} />
             <Route exact path="/restaurants" component={RestaurantsView} />
             <Route exact path="/chatroom" component={ChatRoom} />
           </Switch>
