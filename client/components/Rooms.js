@@ -7,15 +7,7 @@ import GoogleMapCard from './GoogleMapCard'
 import {makeStyles} from '@material-ui/core/styles'
 import {useParams} from 'react-router-dom'
 import Phase1BottomNav from './Phase1BottomNav'
-// import GoogleApiWrapper from './maps';
-// import {Map} from 'google-maps-react';
 
-// const fetchPlaces = (mapProps, map) => {
-//   const {google} = mapProps;
-//   // const service = new google.maps.places.PlacesService(map);
-// }
-
-// googleMapContainer
 const useStyles = makeStyles({
   googleMapContainer: {
     position: 'relative',
@@ -25,29 +17,13 @@ const useStyles = makeStyles({
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     color: 'white',
     height: '300px',
-    width: '1000px',
     padding: '0 30px'
   }
-  // googleMapContainer: {
-  //   width: '200px',
-  //   height: '100px',
-  // },
 })
-// const useStyles = makeStyles(() => ({
-// googleMapContainer: {
-//   width: '200px',
-//   height: '100px',
-// },
-//   GoogleMapCard: {
-//     vh: '100%',
-//     wh: '100%',
-//   },
-// }))
 
 const Rooms = () => {
   const styles = useStyles()
   const {roomId} = useParams()
-
   const [category, setCategory] = useState('')
   const [apiSearch, restaurants] = findRestaurants()
   const [getLocation, location] = findLocation()
@@ -71,6 +47,7 @@ const Rooms = () => {
       <div className={styles.root}>{`you are in room: ${roomId}`}</div>
       <form>
         <select onChange={ev => setCategory(ev.target.value)}>
+          <option key="none" value="" />
           {CATEGORIES.map((category, idx) => {
             const {value, disabled} = category
             return (
@@ -94,9 +71,11 @@ const Rooms = () => {
       </div>
       <div>
         {restaurants
-          ? restaurants.map((restaurant, idx) => (
-              <RestaurantCard key={idx} restaurant={restaurant} />
-            ))
+          ? restaurants.map((restaurant, idx) => {
+              if (!restaurant.is_closed) {
+                return <RestaurantCard key={idx} restaurant={restaurant} />
+              }
+            })
           : null}
       </div>
       <Phase1BottomNav />
