@@ -19,7 +19,7 @@ class GoogleMapCard extends Component {
         }}
         zoom={14}
       >
-        <Marker onClick={this.onMarkerClick} name="Current location" />
+        <Marker title="Current location" name="Current location" />
         {markerData &&
           markerData.map(restaurant => {
             const {latitude, longitude} = restaurant.coordinates
