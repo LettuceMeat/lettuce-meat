@@ -2,6 +2,10 @@
   font-family: 'logoFont';
   src: url('./lettuceMeatLogoFont.ttf');
 }
+@font-face {
+  font-family: 'lightFont';
+  src: url('./Roboto-Light.ttf');
+}
 
 .green1 {
   color: #004732;
@@ -21,14 +25,33 @@
 
 .logoFont {
   font-family: logoFont;
+  color: white;
   font-size: 2.5rem;
+}
+
+.lightFont {
+  font-family: lightFont;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.lightFontSmall {
+  font-family: lightFont;
+  color: white;
+  font-size: 1rem;
+  text-decoration: none;
 }
 
 .header {
   align-items: center;
   display: flex;
   justify-content: space-between;
-  margin: 0.5rem;
+  margin: 0 0.5rem;
+  padding: 1rem 1rem 0rem 1rem;
+}
+
+.navDivider {
+  margin: 0 0.5rem;
 }
 
 .header > * {
@@ -36,8 +59,65 @@
   display: flex;
 }
 
+a {
+  text-decoration: none;
+}
+.nav {
+  text-decoration: none;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0.5rem 1rem 0.5rem;
+  padding: 0 1rem 1rem 1rem;
+}
+
+.navRight {
+  padding: 0 0.75rem;
+}
+
+.mainCard {
+  background-color: white;
+  margin: 0 20%;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 25px 10px #00000048;
+}
+
+@media (max-width: 1300px) {
+  .mainCard {
+    margin: 0 12%;
+  }
+}
+@media (max-width: 1100px) {
+  .mainCard {
+    margin: 0 8%;
+  }
+}
+@media (max-width: 900px) {
+  .mainCard {
+    margin: 0 6%;
+  }
+}
+
+@media (max-width: 700px) {
+  .mainCard {
+    margin: 0 3%;
+  }
+}
+
+@media (max-width: 600px) {
+  .mainCard {
+    margin: 0;
+  }
+}
+
 .spacer {
-  margin: 0 0.5rem;
+  margin: 0 0.25rem;
+}
+
+.gray {
+  background-color: rgb(216, 216, 216);
+  height: 100vh;
 }
 
 .divider {
@@ -46,17 +126,11 @@
 }
 
 .roomDiv {
-  background-color: #004732;
-  border-radius: 5rem;
-  color: white;
   padding: 0.75rem;
 }
 
-.logo {
-  background-image: url('/public/img/logo.png');
-}
-
 body {
+  background-color: rgb(216, 216, 216);
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -90,6 +164,15 @@ code {
   color: white;
   height: 100vh;
 }
+
+.bgGradient {
+  height: 25%;
+  position: relative;
+  top: 0;
+  width: 100vw;
+  background: linear-gradient(90deg, #004732, #548773);
+}
+
 #icons > a:link,
 a:visited,
 a:hover,

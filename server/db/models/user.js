@@ -40,16 +40,9 @@ const User = db.define('user', {
     type: STRING,
     defaultValue: '' //add default icon url here
   },
-  firstName: {
+  userName: {
     type: STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
-  },
-  lastName: {
-    type: STRING,
-    allowNull: false,
+    allowNull: true,
     validate: {
       notEmpty: true
     }
@@ -64,7 +57,6 @@ const User = db.define('user', {
     // allowNull: false,
     // notEmpty: true
   },
-
   isHost: {
     type: Sequelize.BOOLEAN,
     defaultValue: false

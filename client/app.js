@@ -1,13 +1,18 @@
 import React from 'react'
 
-import {Header} from './components'
+import {Header, Nav} from './components'
 import Routes from './routes'
 
 const App = () => {
   return (
-    <div>
-      <Header />
-      <Routes />
+    <div className="gray">
+      <div className="bgGradient">
+        <Header />
+        <Nav />
+        <div className="mainCard">
+          <Routes />
+        </div>
+      </div>
     </div>
   )
 }

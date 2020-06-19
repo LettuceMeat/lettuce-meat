@@ -8,7 +8,7 @@ import {
 
 const LandingPage = () => {
   return (
-    <div id="landingPageWrapper">
+    <div>
       <img />
       <div id="icons">
         <Link to="/login" className="icon">
