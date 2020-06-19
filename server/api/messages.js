@@ -2,9 +2,10 @@ const router = require('express').Router()
 const {Message, User} = require('../db/models')
 module.exports = router
 
-router.get('/', async (req, res, next) => {
+router.get('/:roomId', async (req, res, next) => {
   try {
     const messages = await Message.findAll({
+      where: {roomName: req.params.roomId},
       include: [User]
     })
     res.json(messages)
@@ -13,9 +14,14 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/:roomId', async (req, res, next) => {
+  console.log(req.body)
   try {
-    const message = await Message.create({...req.body, userId: req.user.id})
+    const message = await Message.create({
+      content: req.body.message,
+      userId: req.user.id,
+      roomName: req.params.roomId
+    })
     const newMessage = await Message.findOne({
       where: {id: message.id},
       include: [{model: User}]

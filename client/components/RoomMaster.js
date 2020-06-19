@@ -1,16 +1,31 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import {useSelector, useDispatch} from 'react-redux'
 import {useParams} from 'react-router-dom'
 import findLocation from '../hooks/getLocation'
+import ChatRoom from './ChatRoom'
 import socket from '../socket'
+import {thunkLoadMessages, thunkCreateMessage} from '../store/thunks'
+import {createMessage} from '../store/actions'
 
 export default function RoomMaster() {
-  const [name, setName] = useState()
-  const [message, setMessage] = useState()
   const [getLocation, location] = findLocation()
+  const dispatch = useDispatch()
   const {roomId} = useParams()
 
-  const joinRoom = () => socket.emit('join', roomId, name)
-  const msgRoom = () => socket.emit('roomMessage', roomId, name, message)
+  socket.emit('join', roomId)
+
+  useEffect(() => {
+    dispatch(thunkLoadMessages(roomId))
+    socket.on('roomMessageReceive', content => {
+      dispatch(createMessage(content))
+    })
+  }, [])
+
+  const msgRoom = content => {
+    console.log(roomId, content)
+    dispatch(thunkCreateMessage(roomId, content))
+  }
+
   const msgLocation = () =>
     socket.emit('location', roomId, name, [
       location.latitude,
@@ -19,22 +34,10 @@ export default function RoomMaster() {
 
   return (
     <div>
-      <h1>{`you are in room: ${roomId}`}</h1>
-      name <input onChange={ev => setName(ev.target.value)} />
-      <br />
-      message <input onChange={ev => setMessage(ev.target.value)} />
-      <br />
-      <button type="button" onClick={() => joinRoom()}>
-        join this room
-      </button>
-      <br />
-      <button type="button" onClick={() => msgRoom()}>
-        msg this room
-      </button>
-      <br />
-      <button type="button" onClick={() => msgLocation()}>
-        send my location
-      </button>
+      {/* <button type="button" onClick={() => msgLocation()}>
+        DEBUG send my location
+      </button> */}
+      <ChatRoom roomId={roomId} msgRoom={msgRoom} />
     </div>
   )
 }

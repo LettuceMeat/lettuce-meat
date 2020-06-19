@@ -116,7 +116,7 @@ a {
 }
 
 .gray {
-  background-color: rgb(216, 216, 216);
+  background-color: #dddddd;
   height: 100vh;
 }
 
@@ -127,6 +127,10 @@ a {
 
 .roomDiv {
   padding: 0.75rem;
+}
+
+html {
+  background-color: #dddddd;
 }
 
 body {
@@ -202,7 +206,7 @@ a:active {
 }
 .chatList > .textRight {
   align-self: flex-end;
-  background-color: rgb(71, 180, 245);
+  background-color: #548773;
   border-radius: 20px;
   list-style-type: none;
   margin: 10px;
