@@ -28,7 +28,7 @@ const useStyles = makeStyles({
 })
 
 const RoomPage = () => {
-  const [apiSearch, restaurants] = findRestaurants()
+  // const [restaurants] = findRestaurants()
 
   const styles = useStyles()
 
@@ -48,7 +48,7 @@ const RoomPage = () => {
         <GroupIcon />
         Join Room
       </Button>
-      <Button onClick={() => apiSearch('pasta')}>Making a request</Button>
+      <Button>Making a request</Button>
       <div>
         {restaurants
           ? restaurants.map(restaurant => (
