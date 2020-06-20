@@ -4,9 +4,9 @@ const socket = require('../socket')
 module.exports = router
 
 router.get('/:roomId', async (req, res, next) => {
-  if (!rooms[req.params.roomId])
-    console.log('is not a valid room!!!! redirect back')
-  else console.log('is a valid room redirect to room')
+  //check if a room exists in db
+  console.log('is not a valid room!!!! redirect back')
+  console.log('is a valid room redirect to room')
 })
 
 router.post('/:roomId', async (req, res, next) => {

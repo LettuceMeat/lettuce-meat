@@ -1,40 +1,43 @@
-import React, {useState} from 'react'
+import React, {useEffect} from 'react'
+import {useDispatch} from 'react-redux'
 import {useParams} from 'react-router-dom'
-import findLocation from '../hooks/getLocation'
+import {thunkLoadMessages, thunkCreateMessage} from '../store/thunks'
+import {createMessage} from '../store/actions'
 import socket from '../socket'
+import ChatRoom from './ChatRoom'
 
 export default function RoomMaster() {
-  const [name, setName] = useState()
-  const [message, setMessage] = useState()
-  const [getLocation, location] = findLocation()
+  const dispatch = useDispatch()
   const {roomId} = useParams()
 
-  const joinRoom = () => socket.emit('join', roomId, name)
-  const msgRoom = () => socket.emit('roomMessage', roomId, name, message)
-  const msgLocation = () =>
-    socket.emit('location', roomId, name, [
-      location.latitude,
-      location.longitude
-    ])
+  useEffect(() => {
+    let inRoom = true
+    socket.emit('join', roomId)
+
+    inRoom && dispatch(thunkLoadMessages(roomId))
+    socket.on('roomMessageReceive', content => {
+      dispatch(createMessage(content))
+    })
+
+    return () => {
+      inRoom = false
+      socket.emit('leave', roomId)
+    }
+  }, [])
+
+  const msgRoom = content => dispatch(thunkCreateMessage(roomId, content))
 
   return (
     <div>
-      <h1>{`you are in room: ${roomId}`}</h1>
-      name <input onChange={ev => setName(ev.target.value)} />
-      <br />
-      message <input onChange={ev => setMessage(ev.target.value)} />
-      <br />
-      <button type="button" onClick={() => joinRoom()}>
-        join this room
-      </button>
-      <br />
-      <button type="button" onClick={() => msgRoom()}>
-        msg this room
-      </button>
-      <br />
-      <button type="button" onClick={() => msgLocation()}>
-        send my location
-      </button>
+      <ChatRoom roomId={roomId} msgRoom={msgRoom} />
     </div>
   )
 }
+
+//TO DO ***
+//check if roomId exists in db. if not:
+//  redirect back to home
+//check if logged in if not:
+//  check if guest from local storage if not:
+//    display a name input then create a guest and save the id to local storage
+//go to room

@@ -16,9 +16,6 @@ import {
   NewRoomHome
 } from './components'
 import {me} from './store'
-import {thunkLoadMessages} from './store/thunks'
-import {createMessage} from './store/actions'
-// import socket from './socket'
 
 /**
  * COMPONENT
@@ -26,10 +23,6 @@ import {createMessage} from './store/actions'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
-    // socket.on('message', message => {
-    //   //no need to use thunk
-    //   this.props.createNewMessage(message)
-    // })
   }
 
   render() {
@@ -43,12 +36,12 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route path="/room/:roomId?" component={RoomMaster} />
         <Route exact path="/home" component={RoomPage} />
+        <Route exact path="/chatroom" component={ChatRoom} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             {/* TODO: rename RoomPage to HomePage */}
             <Route exact path="/restaurants" component={RestaurantsView} />
-            <Route exact path="/chatroom" component={ChatRoom} />
             <Route exact path="/roomhome" component={NewRoomHome} />
           </Switch>
         )}
@@ -72,12 +65,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    createNewMessage: message => {
-      dispatch(createMessage(message))
-    },
     loadInitialData() {
       dispatch(me())
-      dispatch(thunkLoadMessages())
     }
   }
 }
