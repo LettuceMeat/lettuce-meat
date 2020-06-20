@@ -65,12 +65,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    createNewMessage: message => {
-      dispatch(createMessage(message))
-    },
     loadInitialData() {
       dispatch(me())
-      // dispatch(thunkLoadMessages())
     }
   }
 }
