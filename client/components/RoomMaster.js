@@ -1,42 +1,34 @@
-import React, {useState, useEffect} from 'react'
-import {useSelector, useDispatch} from 'react-redux'
+import React, {useEffect} from 'react'
+import {useDispatch} from 'react-redux'
 import {useParams} from 'react-router-dom'
-import findLocation from '../hooks/getLocation'
 import ChatRoom from './ChatRoom'
 import socket from '../socket'
 import {thunkLoadMessages, thunkCreateMessage} from '../store/thunks'
 import {createMessage} from '../store/actions'
 
 export default function RoomMaster() {
-  const [getLocation, location] = findLocation()
   const dispatch = useDispatch()
   const {roomId} = useParams()
+
+  //TO DO check if roomId exists in db. if not redirect back to home
 
   socket.emit('join', roomId)
 
   useEffect(() => {
-    dispatch(thunkLoadMessages(roomId))
+    let isSubscribed = true
+    isSubscribed && dispatch(thunkLoadMessages(roomId))
     socket.on('roomMessageReceive', content => {
       dispatch(createMessage(content))
     })
+    return () => {
+      isSubscribed = false
+    }
   }, [])
 
-  const msgRoom = content => {
-    console.log(roomId, content)
-    dispatch(thunkCreateMessage(roomId, content))
-  }
-
-  const msgLocation = () =>
-    socket.emit('location', roomId, name, [
-      location.latitude,
-      location.longitude
-    ])
+  const msgRoom = content => dispatch(thunkCreateMessage(roomId, content))
 
   return (
     <div>
-      {/* <button type="button" onClick={() => msgLocation()}>
-        DEBUG send my location
-      </button> */}
       <ChatRoom roomId={roomId} msgRoom={msgRoom} />
     </div>
   )
