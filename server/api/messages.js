@@ -15,7 +15,6 @@ router.get('/:roomId', async (req, res, next) => {
 })
 
 router.post('/:roomId', async (req, res, next) => {
-  console.log(req.body)
   try {
     const message = await Message.create({
       content: req.body.message,
