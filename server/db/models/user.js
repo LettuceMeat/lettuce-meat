@@ -21,12 +21,12 @@ const User = db.define('user', {
   id: uuidDef,
   email: {
     type: STRING,
-    unique: true,
-    allowNull: false,
-    validate: {
-      isEmail: true,
-      notEmpty: true
-    }
+    unique: true
+    //move this validation to the server
+    // validate: {
+    //   isEmail: true,
+    //   notEmpty: true
+    // }
   },
   password: {
     type: Sequelize.STRING,
