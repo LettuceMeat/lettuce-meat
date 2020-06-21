@@ -1,10 +1,11 @@
 import React, {useEffect} from 'react'
 import {useDispatch} from 'react-redux'
 import {useParams} from 'react-router-dom'
-import {thunkLoadMessages, thunkCreateMessage} from '../store/thunks'
+import {thunkLoadMessages} from '../store/thunks'
 import {createMessage} from '../store/actions'
 import socket from '../socket'
 import ChatRoom from './ChatRoom'
+import axios from 'axios'
 
 export default function RoomMaster() {
   const dispatch = useDispatch()
@@ -25,7 +26,7 @@ export default function RoomMaster() {
     }
   }, [])
 
-  const msgRoom = content => dispatch(thunkCreateMessage(roomId, content))
+  const msgRoom = message => axios.post(`/api/messages/${roomId}`, {message})
 
   return (
     <div>
