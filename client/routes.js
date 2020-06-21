@@ -9,7 +9,7 @@ import {
   Header,
   LandingPage,
   RestaurantsView,
-  RoomPage,
+  HomePage,
   Rooms,
   ChatRoom,
   RoomMaster,
@@ -35,12 +35,11 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/room/:roomId?" component={RoomMaster} />
-        <Route exact path="/home" component={RoomPage} />
+        <Route exact path="/home" component={HomePage} />
         <Route exact path="/chatroom" component={ChatRoom} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            {/* TODO: rename RoomPage to HomePage */}
             <Route exact path="/restaurants" component={RestaurantsView} />
             <Route exact path="/roomhome" component={NewRoomHome} />
           </Switch>

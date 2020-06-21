@@ -1,10 +1,8 @@
-import React, {useEffect, useState} from 'react'
-import {Link} from 'react-router-dom'
+import React from 'react'
 import Button from '@material-ui/core/Button'
 import {makeStyles} from '@material-ui/core/styles'
 import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded'
 import GroupIcon from '@material-ui/icons/Group'
-import findRestaurants from '../hooks/findRestaurants'
 import {generateRoomCode} from '../../script/utils'
 import history from '../history'
 
@@ -27,9 +25,7 @@ const useStyles = makeStyles({
   }
 })
 
-const RoomPage = () => {
-  const [apiSearch, restaurants] = findRestaurants()
-
+const HomePage = () => {
   const styles = useStyles()
 
   const createRoom = () => {
@@ -48,16 +44,8 @@ const RoomPage = () => {
         <GroupIcon />
         Join Room
       </Button>
-      <Button onClick={() => apiSearch('pasta')}>Making a request</Button>
-      <div>
-        {restaurants
-          ? restaurants.map(restaurant => (
-              <div key={restaurant.id}>{restaurant.name}</div>
-            ))
-          : null}
-      </div>
     </div>
   )
 }
 
-export default RoomPage
+export default HomePage

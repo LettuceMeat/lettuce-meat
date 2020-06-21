@@ -25,7 +25,7 @@ const Rooms = () => {
   const styles = useStyles()
   const {roomId} = useParams()
   const [category, setCategory] = useState('')
-  const [apiSearch, restaurants] = findRestaurants()
+  // const [apiSearch, restaurants] = findRestaurants()
   const [getLocation, location] = findLocation()
   const submit = ev => {
     ev.preventDefault()
@@ -37,9 +37,9 @@ const Rooms = () => {
       longitude: location.longitude
     }
 
-    apiSearch(searchObj)
-      .then(rsp => console.log(rsp, restaurants, 'GOOD'))
-      .catch(err => console.log(err, 'BAD'))
+    // apiSearch(searchObj)
+    //   .then(rsp => console.log(rsp, restaurants, 'GOOD'))
+    //   .catch(err => console.log(err, 'BAD'))
   }
 
   return (
