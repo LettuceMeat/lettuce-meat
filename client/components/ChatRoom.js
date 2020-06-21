@@ -23,7 +23,7 @@ export const ChatRoom = props => {
     <React.Fragment>
       <CssBaseline />
       <Container maxWidth="sm">
-        <Typography component="div" style={{backgroundColor: '#cfe8fc'}}>
+        <Typography component="div" style={{backgroundColor: '#a9c7b5'}}>
           <div id="chatBox">
             <ul>
               {messages
@@ -48,7 +48,7 @@ export const ChatRoom = props => {
                               : 'avatarLeft'
                           }
                         >
-                          {message.user.firstName}
+                          {message.user.userName}
                         </div>
                       </div>
                     )
@@ -58,7 +58,7 @@ export const ChatRoom = props => {
             <form
               onSubmit={ev => {
                 ev.preventDefault()
-                props.createMessage(content)
+                props.msgRoom(content)
                 setText('')
               }}
             >

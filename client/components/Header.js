@@ -1,6 +1,5 @@
 import React from 'react'
 import {useRouteMatch} from 'react-router-dom'
-import logo from '../../public/img/logo.jpg'
 
 export default function Header() {
   const match = useRouteMatch('/room/:roomId')
@@ -8,11 +7,13 @@ export default function Header() {
   return (
     <div className="header">
       <div className="logoDiv logoFont">
-        <img src={logo} alt="" height="48" />
+        <img src="/img/logo2.png" alt="" height="48" />
         <span className="spacer" />
         Lettuce Meat
       </div>
-      {roomId && <div className="roomDiv">{`${roomId.toUpperCase()}`}</div>}
+      {roomId && (
+        <div className="roomDiv lightFont">{`${roomId.toUpperCase()}`}</div>
+      )}
     </div>
   )
 }

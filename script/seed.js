@@ -7,7 +7,7 @@ async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const [room_aflo, room_yuqs, room_admg] = await Promise.all([
+  const [roomAFLO, roomYUQS, roomADMG] = await Promise.all([
     Room.create({name: 'AFLO', lat: 40.765628, lng: -73.916954}), //astoria
     Room.create({name: 'YUQS', lat: 40.732445, lng: -73.953338}), //greenpoint
     Room.create({name: 'ADMG', lat: 40.70525, lng: -74.009566}) //fullstack
@@ -16,14 +16,12 @@ async function seed() {
 
   const [cody, murphy] = await Promise.all([
     User.create({
-      firstName: 'Cody',
-      lastName: 'Smith',
+      userName: 'Cody',
       email: 'cody@email.com',
       password: '123'
     }),
     User.create({
-      firstName: 'Murphy',
-      lastName: 'Murphy',
+      userName: 'Murphy',
       email: 'murphy@email.com',
       password: '123'
     })
@@ -39,9 +37,14 @@ async function seed() {
   const [message1, message2] = await Promise.all([
     Message.create({
       content: "hey there guys, let's pick a good restaurant",
-      userId: cody.id
+      userId: cody.id,
+      roomName: roomAFLO.name
     }),
-    Message.create({content: "let's meet in Brooklyn", userId: murphy.id})
+    Message.create({
+      content: "let's meet in Brooklyn",
+      userId: murphy.id,
+      roomName: roomAFLO.name
+    })
   ])
   console.log('2 messages created')
 }

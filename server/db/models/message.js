@@ -25,7 +25,10 @@ const Message = db.define(
           })
           .then(message => {
             if (socket.getIO()) {
-              socket.getIO().emit('message', message)
+              socket
+                .getIO()
+                .to(message.roomName)
+                .emit('roomMessageReceive', message)
             }
           })
       }
