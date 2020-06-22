@@ -34,14 +34,15 @@ class Routes extends Component {
         <Route exact path="/" component={LandingPage} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/room/:roomId?" component={RoomMaster} />
+        <Route exact path="/room/:roomId?" component={NewRoomHome} />
+        <Route exact path="/room/:roomId?/roomHome" component={RoomMaster} />
         <Route exact path="/home" component={HomePage} />
         <Route exact path="/chatroom" component={ChatRoom} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/restaurants" component={RestaurantsView} />
-            <Route exact path="/roomhome" component={NewRoomHome} />
+            {/* <Route exact path="/roomhome" component={NewRoomHome} /> */}
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

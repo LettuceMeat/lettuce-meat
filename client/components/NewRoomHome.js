@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import history from '../history'
+import Button from '@material-ui/core/Button'
 
 export default class NewRoomHome extends Component {
   copyCodeToClipboard = () => {
@@ -6,7 +8,12 @@ export default class NewRoomHome extends Component {
     el.select()
     document.execCommand('copy')
   }
+  goToRoomHome = () => {
+    const roomId = this.props.match.params.roomId
+    history.push(`/room/${roomId}/roomHome`)
+  }
   render() {
+    const roomId = this.props.match.params.roomId
     return (
       <div id="codeHomeWrapper">
         <div id="roomCodeContainer">
@@ -16,14 +23,14 @@ export default class NewRoomHome extends Component {
           <div>
             <textarea
               ref={textarea => (this.textArea = textarea)}
-              value="www.lettuce-meat.com/ROOMCODE"
+              value={`www.lettuce-meat.com/${roomId}`}
               readOnly={true}
             />
           </div>
-          <button onClick={() => this.copyCodeToClipboard()}>
+          <Button onClick={() => this.copyCodeToClipboard()}>
             copy to clipboard
-          </button>
-          <button>go to room</button>
+          </Button>
+          <Button onClick={() => this.goToRoomHome()}>go to room</Button>
         </div>
       </div>
     )
