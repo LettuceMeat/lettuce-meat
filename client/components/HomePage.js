@@ -10,17 +10,16 @@ const useStyles = makeStyles({
   container: {
     alignContent: 'center',
     alignItems: 'center',
-    background: 'linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%)',
     display: 'flex',
     flexDirection: 'row',
     height: '100vh',
     justifyContent: 'center'
   },
   createButtonStyle: {
-    background: 'linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%)',
+    //background: 'linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%)',
     border: 0,
-    color: 'white',
-    fontSize: 'large',
+    color: 'rgb(1, 74, 54)',
+    fontSize: 'larger',
     margin: 5
   }
 })
