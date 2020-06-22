@@ -21,12 +21,7 @@ const User = db.define('user', {
   id: uuidDef,
   email: {
     type: STRING,
-    unique: true,
-    allowNull: false,
-    validate: {
-      isEmail: true,
-      notEmpty: true
-    }
+    unique: true
   },
   password: {
     type: Sequelize.STRING,

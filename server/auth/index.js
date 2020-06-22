@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const User = require('../db/models/user')
+const validator = require('validator')
 module.exports = router
 
 router.post('/login', async (req, res, next) => {
@@ -20,20 +21,28 @@ router.post('/login', async (req, res, next) => {
 })
 
 router.post('/signup', async (req, res, next) => {
+  const emailErr = {name: 'emailError'}
   try {
-    //TODO maybe need to also add user first/last name?
-    const user = await User.create({
-      email: req.body.email,
-      password: req.body.password,
-      isHost: false
-    })
+    if (!validator.isEmail(req.body.email)) throw emailErr
+    const user = await User.create(req.body)
     req.login(user, err => (err ? next(err) : res.json(user)))
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
       res.status(401).send('User already exists')
+    } else if (err.name === 'emailError') {
+      res.status(401).send('Invalid Email')
     } else {
       next(err)
     }
+  }
+})
+
+router.post('/guest', async (req, res, next) => {
+  try {
+    const user = await User.create(req.body)
+    req.login(user, err => (err ? next(err) : res.json(user)))
+  } catch (err) {
+    next(err)
   }
 })
 

@@ -48,6 +48,23 @@ const AuthForm = props => {
             />
           </div>
         </div>
+
+        <div>
+          <label htmlFor="userName" className={styles.label}>
+            <small>User Name</small>
+          </label>
+          <div className={styles.label}>
+            <TextField
+              id="standard-userName-input"
+              label="userName"
+              variant="outlined"
+              name="userName"
+              type="text"
+              margin="dense"
+            />
+          </div>
+        </div>
+
         <div>
           <label htmlFor="password" className={styles.label}>
             <small>Password</small>
@@ -108,8 +125,9 @@ const mapDispatch = dispatch => {
       evt.preventDefault()
       const formName = evt.target.name
       const email = evt.target.email.value
+      const userName = evt.target.userName.value
       const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+      dispatch(auth(email, userName, password, formName))
     }
   }
 }
