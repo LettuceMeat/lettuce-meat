@@ -22,11 +22,6 @@ const User = db.define('user', {
   email: {
     type: STRING,
     unique: true
-    //move this validation to the server
-    // validate: {
-    //   isEmail: true,
-    //   notEmpty: true
-    // }
   },
   password: {
     type: Sequelize.STRING,
