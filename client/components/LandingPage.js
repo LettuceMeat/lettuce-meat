@@ -20,7 +20,9 @@ const LandingPage = () => {
     <div>
       <img />
       <input onChange={ev => setName(ev.target.value)} />
-      <button onClick={() => create()}>create a guest</button>
+      <button type="button" onClick={() => create()}>
+        create a guest
+      </button>
       <div id="icons">
         <Link to="/login" className="icon">
           <AccountCircleTwoTone style={{fontSize: 100, color: 'white'}} /> Sign

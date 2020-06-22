@@ -22,7 +22,9 @@ export default function Nav() {
             </a>
           </span>
         ) : (
-          <Link to="/login">Login / Signup</Link>
+          <Link to="/login">
+            {user.userName ? `(${user.userName}) ` : ''}Login / Signup
+          </Link>
         )}
         <span className="navDivider" />|<span className="navDivider" />
         <Link to="/">Sponsored</Link>
