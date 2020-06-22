@@ -176,7 +176,7 @@ code {
   position: relative;
   top: 0;
   width: 100vw;
-  background: linear-gradient(90deg, #004732, #548773);
+  background: linear-gradient(180deg, #004732, #548773);
 }
 
 #icons > a:link,

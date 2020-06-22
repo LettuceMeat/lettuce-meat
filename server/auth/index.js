@@ -40,6 +40,7 @@ router.post('/signup', async (req, res, next) => {
 router.post('/guest', async (req, res, next) => {
   try {
     const user = await User.create(req.body)
+    req.login(user, err => (err ? next(err) : res.json(user)))
   } catch (err) {
     next(err)
   }
