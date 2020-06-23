@@ -1,6 +1,6 @@
 {
   "short_name": "Lettuce Meat",
-  "name": "Lettuce Meat App",
+  "name": "Lettuce Meat",
   "icons": [
     {
       "src": "/img/logo.png",
@@ -9,7 +9,7 @@
     }
   ],
   "start_url": "/",
-  "display": "standalone",
+  "display": "fullscreen",
   "theme_color": "#004732",
   "background_color": "#a9c7b5"
 }
