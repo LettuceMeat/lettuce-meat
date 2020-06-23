@@ -1,4 +1,5 @@
 const isDev = process.env.NODE_ENV === 'development'
+const WorkboxPlugin = require('workbox-webpack-plugin')
 
 module.exports = {
   mode: isDev ? 'development' : 'production',
@@ -34,5 +35,24 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  plugins: [
+    new WorkboxPlugin.GenerateSW({
+      swDest: './public/service-worker.js',
+      maximumFileSizeToCacheInBytes: 50000000,
+      exclude: [/\.(?:png|jpg|jpeg|svg)$/],
+      runtimeCaching: [
+        {
+          urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'images',
+            expiration: {
+              maxEntries: 10
+            }
+          }
+        }
+      ]
+    })
+  ]
 }
