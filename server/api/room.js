@@ -4,9 +4,11 @@ const socket = require('../socket')
 module.exports = router
 
 router.get('/:roomId', async (req, res, next) => {
-  //check if a room exists in db
-  console.log('is not a valid room!!!! redirect back')
-  console.log('is a valid room redirect to room')
+  const room = await Room.findAll({
+    where: {name: req.params.roomId},
+    include: [User, Message]
+  })
+  res.json(room)
 })
 
 router.post('/:roomId', async (req, res, next) => {

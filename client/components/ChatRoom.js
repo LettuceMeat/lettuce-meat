@@ -58,7 +58,7 @@ export const ChatRoom = props => {
             <form
               onSubmit={ev => {
                 ev.preventDefault()
-                props.msgRoom(content)
+                props.sendMessage(content)
                 setText('')
               }}
             >

@@ -18,15 +18,29 @@ async function seed() {
     User.create({
       userName: 'Cody',
       email: 'cody@email.com',
-      password: '123'
+      password: '123',
+      lat: 40.757399,
+      lng: -73.908797,
+      roomName: roomAFLO.name
     }),
     User.create({
       userName: 'Murphy',
       email: 'murphy@email.com',
-      password: '123'
+      password: '123',
+      lat: 40.767399,
+      lng: -73.908797,
+      roomName: roomAFLO.name
+    }),
+    User.create({
+      userName: 'Sally',
+      email: 'sally@email.com',
+      password: '123',
+      lat: 40.759399,
+      lng: -73.912797,
+      roomName: roomAFLO.name
     })
   ])
-  console.log('2 users created')
+  console.log('3 users created')
 
   const [preference1, preference2] = await Promise.all([
     Preference.create({cuisine: 'Chinese', moneys: '$$', userId: cody.id}),

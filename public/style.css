@@ -19,8 +19,22 @@
 .green4 {
   color: #a9c7b5;
 }
+
+.green5 {
+  color: #646665;
+}
 .red {
   color: rgb(119, 67, 48);
+}
+
+.mapContainer {
+  position: relative;
+  height: 300px;
+  border-radius: 1rem;
+}
+
+.chatContainer {
+  margin: 1rem;
 }
 
 .logoFont {

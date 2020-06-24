@@ -37,22 +37,22 @@ module.exports = {
     ]
   },
   plugins: [
-    new WorkboxPlugin.GenerateSW({
-      swDest: './public/service-worker.js',
-      maximumFileSizeToCacheInBytes: 50000000,
-      exclude: [/\.(?:png|jpg|jpeg|svg)$/],
-      runtimeCaching: [
-        {
-          urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
-          handler: 'CacheFirst',
-          options: {
-            cacheName: 'images',
-            expiration: {
-              maxEntries: 10
-            }
-          }
-        }
-      ]
-    })
+    // new WorkboxPlugin.GenerateSW({
+    //   swDest: './public/service-worker.js',
+    //   maximumFileSizeToCacheInBytes: 50000000,
+    //   exclude: [/\.(?:png|jpg|jpeg|svg)$/],
+    //   runtimeCaching: [
+    //     {
+    //       urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
+    //       handler: 'CacheFirst',
+    //       options: {
+    //         cacheName: 'images',
+    //         expiration: {
+    //           maxEntries: 10
+    //         }
+    //       }
+    //     }
+    //   ]
+    // })
   ]
 }
