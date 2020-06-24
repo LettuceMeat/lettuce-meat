@@ -10,34 +10,32 @@ class GoogleMapCard extends Component {
   }
 
   render() {
-    console.log('map render')
     const {latitude, longitude, restaurantData, userData} = this.props
     return (
       <Map className='mapContainer'
         google={this.props.google}
-        center={{
+        initialCenter={{
           lat: latitude,
           lng: longitude
         }}
-        zoom={14}
-        draggable={false}
+        zoom={13}
+        draggable={true}
         disableDefaultUI={true}
         styles={styles}
       >
         <Marker title="Current location" name="Current location" />
 
         {userData &&
-          userData.map(restaurant => {
-            const {latitude, longitude} = restaurant.coordinates
-            const coordinates = {lat: latitude, lng: longitude}
+          userData.map(user => {
+            const coordinates = {lat: user.lat, lng: user.lng}
             return (
               <Marker
-                key={restaurant.id}
-                title={restaurant.name}
-                name={restaurant.name}
+                key={user.id}
+                title={user.userName}
+                name={user.userName}
                 position={coordinates}
                 icon={{
-                  url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+                  url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
                 }}
               />
             )

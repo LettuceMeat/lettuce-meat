@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useParams} from 'react-router-dom'
-import {thunkLoadMessages} from '../store/thunks'
-import {createMessage} from '../store/actions'
+import {thunkLoadMessages, thunkLoadRoomUsers, thunkUpdateUserRoom, thunkUpdateUserLoc} from '../store/thunks'
+import {createMessage, addRoomUser, updateUserLoc} from '../store/actions'
 import findLocation from '../hooks/getLocation'
 import socket from '../socket'
 import ChatRoom from './ChatRoom'
@@ -11,36 +11,45 @@ import axios from 'axios'
 
 export default function RoomMaster() {
   const user = useSelector(state => state.user)
-  // const roomUsers = useSelector(state => state.roomUsers)
-  const messages = useSelector(state => state.messages)
+  const roomUsers = useSelector(state => state.roomUsers)
   const dispatch = useDispatch()
   const {roomId} = useParams()
   const [getLocation, location] = findLocation()
 
-  //location effect - update user location
   useEffect(() => {
-    if (user.userName && location.latitude) {
-      socket.emit('location', roomId, user, [location.latitude, location.longitude])
+    let inRoom = true
+    if (inRoom && user.userName && location.latitude) {
+      dispatch(thunkUpdateUserLoc(user, [location.latitude, location.longitude]))
     }
-  }, [location])
+    if (user.userName) {
+      dispatch(thunkUpdateUserRoom(user, roomId))
+    } 
 
-  //roomUsers effect - everytime someone joins update the room location
-  // useEffect(() => {
-  //   //run the average location util and update the view of the map
-  // }, [roomUsers])
+    return () => {inRoom = false}
+  }, [user, location])
+
+  useEffect(() => {
+    let inRoom = true
+    return () => {inRoom = false}
+  }, [roomUsers])
 
   //join effect - join room, load previous messages, set up socket
   useEffect(() => {
     let inRoom = true
-    socket.emit('join', roomId)
-    inRoom && dispatch(thunkLoadMessages(roomId))
+    if (inRoom) {
+      dispatch(thunkLoadMessages(roomId))
+      dispatch(thunkLoadRoomUsers(roomId))
+    }
 
+    socket.emit('join', roomId)
     socket.on('roomMessageReceive', content => {
       dispatch(createMessage(content))
     })
-
-    socket.on('locationMessage', message => {
-      console.log('**location message**', message)
+    socket.on('roomUserReceive', user => {
+      dispatch(addRoomUser(user))
+    })
+    socket.on('roomLocationReceive', user => {
+      dispatch(updateUserLoc(user))
     })
 
     return () => {
@@ -54,7 +63,7 @@ export default function RoomMaster() {
   return (
     <div>
       <div className='mapContainer'>
-       {location.latitude && <GoogleMapCard latitude={location.latitude} longitude={location.longitude} />}
+       {location.latitude && <GoogleMapCard latitude={location.latitude} longitude={location.longitude} userData={roomUsers}/>}
       </div>
       <div className='chatContainer'>
         <ChatRoom roomId={roomId} sendMessage={sendMessage} />

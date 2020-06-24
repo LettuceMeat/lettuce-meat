@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 import Button from '@material-ui/core/Button'
 import {makeStyles} from '@material-ui/core/styles'
 import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded'
@@ -27,9 +28,9 @@ const useStyles = makeStyles({
 const HomePage = () => {
   const styles = useStyles()
 
-  const createRoom = () => {
+  const createRoom = async() => {
     const roomCode = generateRoomCode()
-    //check here to make sure room code is unique
+    const newRoom = (await axios.post(`/api/room/${roomCode}`))
     history.push(`/room/${roomCode}`)
   }
 

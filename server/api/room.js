@@ -13,7 +13,11 @@ router.get('/:roomId', async (req, res, next) => {
 
 router.post('/:roomId', async (req, res, next) => {
   try {
-    const newRoom = await Room.create({name: req.params.roomId})
+    let newRoom = await Room.findAll({
+      where: {name: req.params.roomId},
+    })
+    if (newRoom.length === 0) await Room.create({name: req.params.roomId})
+    res.sendStatus(201)
   } catch (error) {
     next(error)
   }

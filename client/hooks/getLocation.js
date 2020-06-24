@@ -4,7 +4,8 @@ export default () => {
   const [location, setLocation] = useState({})
   var options = {
     enableHighAccuracy: true,
-    maximumAge: 0
+    maximumAge: 60000,
+    timeout: 10000
   }
 
   function success(pos) {
