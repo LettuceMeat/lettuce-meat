@@ -1,5 +1,10 @@
 import axios from 'axios'
-import {loadMessages, createMessage} from './actions'
+import {loadMessages, createMessage, loadRestaurants} from './actions'
+
+const getSponsoredRestaurants = () => async dispatch => {
+  const sponsoredRestaurants = (await axios.get(`/api/restaurants`)).data;
+  return dispatch(loadRestaurants(sponsoredRestaurants))
+}
 
 const thunkLoadMessages = roomId => async dispatch => {
   const messages = (await axios.get(`/api/messages/${roomId}`)).data
@@ -11,4 +16,8 @@ const thunkCreateMessage = (roomId, message) => async dispatch => {
   dispatch(createMessage(newMessage))
 }
 
-export {thunkLoadMessages, thunkCreateMessage}
+export {
+  thunkLoadMessages,
+  thunkCreateMessage,
+  getSponsoredRestaurants,
+}

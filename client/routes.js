@@ -13,7 +13,8 @@ import {
   Rooms,
   ChatRoom,
   RoomMaster,
-  NewRoomHome
+  NewRoomHome,
+  Sponsored
 } from './components'
 import {me} from './store'
 
@@ -26,11 +27,12 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn} = this.props
+    const {isLoggedIn, isAdmin} = this.props
 
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
+        <Route exact path="/asdf" component={Rooms} />
         <Route exact path="/" component={LandingPage} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
@@ -43,6 +45,11 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/restaurants" component={RestaurantsView} />
             {/* <Route exact path="/roomhome" component={NewRoomHome} /> */}
+            {isAdmin && (
+              <Switch>
+                  <Route exact path="/admin" component={Sponsored} />
+              </Switch>
+            )}
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
@@ -59,7 +66,8 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isAdmin: state.user.isAdmin,
+    isLoggedIn: !!state.user.id,
   }
 }
 

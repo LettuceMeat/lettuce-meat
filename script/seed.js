@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {Room, User, Message, Preference} = require('../server/db/models')
+const {Room, User, Message, Preference, Restaurant} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -24,9 +24,21 @@ async function seed() {
       userName: 'Murphy',
       email: 'murphy@email.com',
       password: '123'
+    }),
+    User.create({
+      userName: 'admin',
+      email: 'admin@lettucemeat.com',
+      password: '456',
+      isAdmin: true,
     })
   ])
   console.log('2 users created')
+
+  const [jjs, aji, jujube] = await Promise.all([
+    Restaurant.create({yelpId: 'k4QfaFoqtpEZ1LZylJZqww', sponsored: true, sponsorshipExpiration: 1596168000000}),
+    Restaurant.create({yelpId: 'u3JBjUgrCdxy6WF0tnX3SA', sponsored: true, sponsorshipExpiration: 1596168000000}),
+    Restaurant.create({yelpId: 'S7ivv5O0beH3U9cV3cRD_Q', sponsored: true, sponsorshipExpiration: 1596168000000}),
+  ])
 
   const [preference1, preference2] = await Promise.all([
     Preference.create({cuisine: 'Chinese', moneys: '$$', userId: cody.id}),
