@@ -8,19 +8,17 @@ const generateRoomCode = () => {
   return code
 }
 
-//takes an array of [lat, lng] user location arrays
-//returns the average coordinates, aka the room center
 const averageUserLocation = users => {
+  if (!users.length) return {lat: 0, lng: 0}
   const summed = users.reduce(
-    (sum, coord) => {
-      sum[0] += coord[0]
-      sum[1] += coord[1]
+    (sum, user) => {
+      sum[0] += (user.lat*1)
+      sum[1] += (user.lng*1)
       return sum
     },
     [0, 0]
   )
-  const average = [summed[0] / users.length, summed[1] / users.length]
-
+  const average = {lat: summed[0] / users.length, lng: summed[1] / users.length}
   return average
 }
 

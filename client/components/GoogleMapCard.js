@@ -10,20 +10,19 @@ class GoogleMapCard extends Component {
   }
 
   render() {
-    const {latitude, longitude, restaurantData, userData} = this.props
+    console.log('map render')
+    const {center, restaurantData, userData} = this.props
+    console.log(center)
     return (
       <Map className='mapContainer'
         google={this.props.google}
-        initialCenter={{
-          lat: latitude,
-          lng: longitude
-        }}
-        zoom={13}
+        center={center}
+        zoom={14}
         draggable={true}
         disableDefaultUI={true}
         styles={styles}
       >
-        <Marker title="Current location" name="Current location" />
+        {/* <Marker title="Current location" name="Current location" /> */}
 
         {userData &&
           userData.map(user => {
