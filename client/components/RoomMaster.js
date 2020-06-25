@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useParams} from 'react-router-dom'
-import {thunkLoadMessages, thunkLoadRoomUsers, thunkUpdateUserRoom, thunkUpdateUserLoc} from '../store/thunks'
-import {createMessage, addRoomUser, updateUserLoc} from '../store/actions'
+import {thunkLoadMessages, thunkLoadRoomUsers, thunkUpdateUserRoom, thunkUpdateUserLoc, thunkInitUser} from '../store/thunks'
+import {createMessage, addRoomUser, updateUserLoc, initUser} from '../store/actions'
 import findLocation from '../hooks/getLocation'
 import socket from '../socket'
 import ChatRoom from './ChatRoom'
@@ -11,7 +11,7 @@ import axios from 'axios'
 import {averageUserLocation} from '../../script/utils'
 
 export default function RoomMaster() {
-  const [center, setCenter] = useState({lat: 0, lng: 0})
+  const [center, setCenter] = useState({lat: 40, lng: -70})
   const user = useSelector(state => state.user)
   const roomUsers = useSelector(state => state.roomUsers)
   const dispatch = useDispatch()
@@ -20,12 +20,9 @@ export default function RoomMaster() {
 
   useEffect(() => {
     let inRoom = true
-    if (inRoom && user.userName && location.latitude) {
-      dispatch(thunkUpdateUserLoc(user, [location.latitude, location.longitude]))
+    if (inRoom && user.id && location.latitude) {
+      dispatch(thunkInitUser(user, roomId, [location.latitude, location.longitude]))
     }
-    if (user.userName) {
-      dispatch(thunkUpdateUserRoom(user, roomId))
-    } 
 
     return () => {inRoom = false}
   }, [user, location])
@@ -33,16 +30,15 @@ export default function RoomMaster() {
   useEffect(() => {
     let inRoom = true
     const check = roomUsers.every(user => user.lat)
-    console.log(check)
-    if (check) {
+    if (inRoom && check) {
       setCenter(averageUserLocation(roomUsers))
-    } 
+    }
     return () => {inRoom = false}
   }, [roomUsers])
 
-  //join effect - join room, load previous messages, set up socket
   useEffect(() => {
     let inRoom = true
+
     if (inRoom) {
       dispatch(thunkLoadMessages(roomId))
       dispatch(thunkLoadRoomUsers(roomId))
@@ -51,15 +47,12 @@ export default function RoomMaster() {
     socket.emit('join', roomId)
 
     socket.on('roomMessageReceive', content => {
-      console.log('socket message')
       dispatch(createMessage(content))
     })
     socket.on('roomUserReceive', user => {
-      console.log('socket user joined')
-      dispatch(addRoomUser(user))
+      dispatch(initUser(user))
     })
     socket.on('roomLocationReceive', user => {
-      console.log('socket location')
       dispatch(updateUserLoc(user))
     })
 
@@ -74,7 +67,7 @@ export default function RoomMaster() {
   return (
     <div>
       <div className='mapContainer'>
-       {center.lat && user.lat && <GoogleMapCard center={center} userData={roomUsers}/>}
+       {<GoogleMapCard center={center} userData={roomUsers}/>}
       </div>
       <div className='chatContainer'>
         <ChatRoom roomId={roomId} sendMessage={sendMessage} />

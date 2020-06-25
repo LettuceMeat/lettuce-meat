@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {loadMessages, createMessage, loadRoom, loadRoomUsers, updateUserRoom, updateUserLoc} from './actions'
+import {loadMessages, createMessage, loadRoom, loadRoomUsers, updateUserRoom, updateUserLoc, initUser} from './actions'
 
 const thunkLoadMessages = roomId => async dispatch => {
   const messages = (await axios.get(`/api/messages/${roomId}`)).data
@@ -32,5 +32,11 @@ const thunkUpdateUserLoc = (user, loc) => async dispatch => {
   return dispatch(updateUserLoc(userLoc))
 }
 
+const thunkInitUser = (user, roomId, loc) => async dispatch => {
+  const location = {lat: loc[0], lng: loc[1]}
+  const initializedUser = (await axios.put(`/api/users/initialize/${user.id}/${roomId}`, location)).data
+  return dispatch(initUser(initializedUser))
+}
 
-export {thunkLoadMessages, thunkCreateMessage, thunkLoadRoom, thunkLoadRoomUsers, thunkUpdateUserRoom, thunkUpdateUserLoc}
+
+export {thunkLoadMessages, thunkCreateMessage, thunkLoadRoom, thunkLoadRoomUsers, thunkUpdateUserRoom, thunkUpdateUserLoc, thunkInitUser}

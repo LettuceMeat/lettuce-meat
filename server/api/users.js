@@ -25,6 +25,7 @@ router.get('/:roomId', async (req, res, next) => {
 })
 
 router.put('/room/:userId/:roomId', async (req, res, next) => {
+  console.log('room put', req.params)
   const user = await User.findByPk(req.params.userId)
   await user.update({roomName: req.params.roomId})
   if (socket.getIO()) {
@@ -36,7 +37,32 @@ router.put('/room/:userId/:roomId', async (req, res, next) => {
   res.json(user)
 })
 
+router.put('/initialize/:userId/:roomId', async (req, res, next) => {
+  const randLat = (Math.random() * 0.03)
+  const randLng = (Math.random() * 0.03)
+  const randLatneg = (Math.random() * 0.03)
+  const randLngneg = (Math.random() * 0.03)
+
+  const lat = req.body.lat + randLat - randLatneg
+  const lng = req.body.lng + randLng - randLngneg
+  
+  const user = await User.findByPk(req.params.userId)
+  await user.update({
+    roomName: req.params.roomId,
+    lat: lat,
+    lng: lng
+  })
+  if (socket.getIO()) {
+    socket
+      .getIO()
+      .to(req.params.roomId)
+      .emit('roomUserReceive', user)
+  }
+  res.json(user)
+})
+
 router.put('/location/:userId', async (req, res, next) => {
+  console.log('location put')
   const randLat = (Math.random() * 0.03)
   const randLng = (Math.random() * 0.03)
   const randLatneg = (Math.random() * 0.03)

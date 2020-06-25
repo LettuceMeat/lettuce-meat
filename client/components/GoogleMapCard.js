@@ -10,14 +10,13 @@ class GoogleMapCard extends Component {
   }
 
   render() {
-    console.log('map render')
     const {center, restaurantData, userData} = this.props
-    console.log(center)
     return (
       <Map className='mapContainer'
         google={this.props.google}
+        initialCenter={center}
         center={center}
-        zoom={14}
+        zoom={13}
         draggable={true}
         disableDefaultUI={true}
         styles={styles}
@@ -35,6 +34,11 @@ class GoogleMapCard extends Component {
                 position={coordinates}
                 icon={{
                   url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+                }}
+                label={{
+                  text: user.userName,
+                  fontFamily: "Arial",
+                  fontSize: "16px",
                 }}
               />
             )
