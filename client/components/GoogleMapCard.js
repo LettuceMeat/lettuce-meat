@@ -10,18 +10,26 @@ class GoogleMapCard extends Component {
   }
 
   render() {
-    const {center, restaurantData, userData} = this.props
+    const {restaurantData, userData} = this.props
+
+    const points = userData.map(user => {
+      return {lat: user.lat*1, lng: user.lng*1}
+    })
+
+    const bounds = new this.props.google.maps.LatLngBounds();
+    for (let i = 0; i < points.length; i++) {
+      bounds.extend(points[i]);
+    }
+
+    if (!points) return <h1>loading...</h1>
     return (
       <Map className='mapContainer'
         google={this.props.google}
-        initialCenter={center}
-        center={center}
-        zoom={13}
         draggable={true}
         disableDefaultUI={true}
         styles={styles}
+        bounds={bounds}
       >
-        {/* <Marker title="Current location" name="Current location" /> */}
 
         {userData &&
           userData.map(user => {

@@ -1,5 +1,4 @@
 import io from 'socket.io-client'
-import {createMessage} from './store/actions'
 
 const socket = io(window.location.origin)
 
