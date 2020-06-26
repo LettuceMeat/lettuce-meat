@@ -4,12 +4,28 @@ import {googleKey} from '../../secrets'
 const styles = require('../../GoogleMapStyles.json')
 
 class GoogleMapCard extends Component {
-  constructor() {
-    super()
-    this.state = {}
+  constructor(props) {
+    super(props)
+    this.state = {
+    }
+    this.loadHandler = this.loadHandler.bind(this)
+  }
+
+  loadHandler(mapProps, map) {
+    const points = this.props.userData.map(user => {
+      return {lat: user.lat*1, lng: user.lng*1}
+    })
+
+    const bounds = new this.props.google.maps.LatLngBounds();
+    for (let i = 0; i < points.length; i++) {
+      bounds.extend(points[i]);
+    }
+    console.log('fit bounds')
+    map.fitBounds(bounds)
   }
 
   render() {
+    console.log('map render')
     const {restaurantData, userData} = this.props
 
     const points = userData.map(user => {
@@ -21,13 +37,13 @@ class GoogleMapCard extends Component {
       bounds.extend(points[i]);
     }
 
-    if (!points) return <h1>loading...</h1>
     return (
       <Map className='mapContainer'
         google={this.props.google}
         draggable={true}
         disableDefaultUI={true}
         styles={styles}
+        onReady={this.loadHandler}
         bounds={bounds}
       >
 

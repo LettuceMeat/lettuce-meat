@@ -49,8 +49,8 @@ router.put('/initialize/:userId/:roomId', async (req, res, next) => {
   const user = await User.findByPk(req.params.userId)
   await user.update({
     roomName: req.params.roomId,
-    lat: lat,
-    lng: lng
+    lat: lat*1,
+    lng: lng*1
   })
   if (socket.getIO()) {
     socket

@@ -16,6 +16,8 @@ export default function RoomMaster() {
   const {roomId} = useParams()
   const [getLocation, location] = findLocation()
 
+  //someimtes initialize leads before load users
+
   useEffect(() => {
     let inRoom = true
     if (inRoom) {
@@ -40,7 +42,7 @@ export default function RoomMaster() {
   useEffect(() => {
     let inRoom = true
     if (inRoom && user.id && location.latitude) {
-      const locationData = {lat: location.latitude, lng: location.longitude}
+      const locationData = {lat: location.latitude*1, lng: location.longitude*1}
       axios.put(`/api/users/initialize/${user.id}/${roomId}`, locationData)
     }
     return () => {inRoom = false}
@@ -51,7 +53,7 @@ export default function RoomMaster() {
   return (
     <div>
       <div className='mapContainer'>
-       {roomUsers && <GoogleMapCard userData={roomUsers}/>}
+       {roomUsers.length && <GoogleMapCard userData={roomUsers}/>}
       </div>
       <div className='chatContainer'>
         <ChatRoom roomId={roomId} sendMessage={sendMessage} />

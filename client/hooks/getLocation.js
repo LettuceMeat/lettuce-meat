@@ -5,7 +5,7 @@ export default () => {
   var options = {
     enableHighAccuracy: true,
     maximumAge: 600000,
-    timeout: 5000
+    timeout: 10000
   }
 
   function success(pos) {
