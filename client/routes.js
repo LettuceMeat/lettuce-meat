@@ -13,7 +13,8 @@ import {
   Rooms,
   ChatRoom,
   RoomMaster,
-  NewRoomHome
+  NewRoomHome,
+  GoogleMapCard
 } from './components'
 import {me} from './store'
 
@@ -34,6 +35,7 @@ class Routes extends Component {
         <Route exact path="/" component={LandingPage} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route path="/google" component={GoogleMapCard} />
         <Route exact path="/room/:roomId?" component={NewRoomHome} />
         <Route exact path="/room/:roomId?/roomHome" component={RoomMaster} />
         <Route exact path="/home" component={HomePage} />

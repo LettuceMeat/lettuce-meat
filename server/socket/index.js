@@ -9,10 +9,11 @@ const setup = io => {
       socket.join(roomId)
     })
 
-    socket.on('location', (roomId, name, location) => {
-      socket
+    socket.on('location', (roomId, user, location) => {
+      console.log('got loc')
+      io
         .to(roomId)
-        .emit('locationMessage', `${name} is at ${location[0]}, ${location[1]}`)
+        .emit('locationMessage', `${user.userName} is at ${location[0]}, ${location[1]}`)
     })
 
     socket.on('roomMessageSend', (roomId, content) => {

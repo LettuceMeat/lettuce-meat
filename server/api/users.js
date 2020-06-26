@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const {User} = require('../db/models')
+const socket = require('../socket')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -14,4 +15,48 @@ router.get('/', async (req, res, next) => {
   } catch (err) {
     next(err)
   }
+})
+
+router.get('/:roomId', async (req, res, next) => {
+  const roomUsers = await User.findAll({
+    where: {roomName: req.params.roomId},
+  })
+  res.json(roomUsers)
+})
+
+router.put('/room/:userId/:roomId', async (req, res, next) => {
+  console.log('room put', req.params)
+  const user = await User.findByPk(req.params.userId)
+  await user.update({roomName: req.params.roomId})
+  if (socket.getIO()) {
+    socket
+      .getIO()
+      .to(req.params.roomId)
+      .emit('roomUserReceive', user)
+  }
+  res.json(user)
+})
+
+router.put('/initialize/:userId/:roomId', async (req, res, next) => {
+  const randLat = (Math.random() * 0.03)
+  const randLng = (Math.random() * 0.03)
+  const randLatneg = (Math.random() * 0.03)
+  const randLngneg = (Math.random() * 0.03)
+
+  const lat = req.body.lat + randLat - randLatneg
+  const lng = req.body.lng + randLng - randLngneg
+  
+  const user = await User.findByPk(req.params.userId)
+  await user.update({
+    roomName: req.params.roomId,
+    lat: lat*1,
+    lng: lng*1
+  })
+  if (socket.getIO()) {
+    socket
+      .getIO()
+      .to(req.params.roomId)
+      .emit('roomUserReceive', user)
+  }
+  res.json(user)
 })

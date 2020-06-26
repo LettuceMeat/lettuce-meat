@@ -22,7 +22,7 @@ export const ChatRoom = props => {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container maxWidth="sm">
+      <Container maxWidth="sm" style={{margin: 0}}>
         <Typography component="div" style={{backgroundColor: '#a9c7b5'}}>
           <div id="chatBox">
             <ul>
@@ -58,7 +58,7 @@ export const ChatRoom = props => {
             <form
               onSubmit={ev => {
                 ev.preventDefault()
-                props.msgRoom(content)
+                props.sendMessage(content)
                 setText('')
               }}
             >

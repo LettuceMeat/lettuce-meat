@@ -8,7 +8,7 @@ export default class NewRoomHome extends Component {
     el.select()
     document.execCommand('copy')
   }
-  goToRoomHome = () => {
+  goToRoomHome = async () => {
     const roomId = this.props.match.params.roomId
     history.push(`/room/${roomId}/roomHome`)
   }

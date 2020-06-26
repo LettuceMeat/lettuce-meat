@@ -108,10 +108,10 @@ define("./service-worker.js",['./workbox-75a787e8'], function (workbox) { 'use s
 
   workbox.precacheAndRoute([{
     "url": "./public/bundle.js",
-    "revision": "66a610d64ce28e37d25fa7fd451284a2"
+    "revision": "35a52201ceeab92a35db350e0c759275"
   }, {
     "url": "./public/bundle.js.map",
-    "revision": "43c3fc4775b7e3ce75a774d1c5821b05"
+    "revision": "864e99e1289065fcd6db75e14b394f2b"
   }], {});
   workbox.registerRoute(/\.(?:png|jpg|jpeg|svg)$/, new workbox.CacheFirst({
     "cacheName": "images",
