@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useParams} from 'react-router-dom'
 import {thunkLoadMessages, thunkLoadRoomUsers} from '../store/thunks'
@@ -8,16 +8,19 @@ import socket from '../socket'
 import ChatRoom from './ChatRoom'
 import GoogleMapCard from './GoogleMapCard'
 import axios from 'axios'
+import {averageUserLocation} from '../../script/utils'
 
 export default function RoomMaster() {
+  const [center, setCenter] = useState({lat: 0, lng: 0})
   const user = useSelector(state => state.user)
   const roomUsers = useSelector(state => state.roomUsers)
   const dispatch = useDispatch()
   const {roomId} = useParams()
   const [getLocation, location] = findLocation()
 
-  //someimtes initialize leads before load users
+  //BUG sometimes initialize loads before load users
 
+  //on mount - load data, join socket room, set up socket to receive
   useEffect(() => {
     let inRoom = true
     if (inRoom) {
@@ -39,6 +42,14 @@ export default function RoomMaster() {
     }
   }, [])
 
+  //calculate the rooms center every time the roomusers updates
+  useEffect(() => {
+    let inRoom = true
+      inRoom && roomUsers && setCenter(averageUserLocation(roomUsers))
+    return () => {inRoom = false}
+  }, [roomUsers])
+
+  //once we have the user and location put it to the db and send to sockets
   useEffect(() => {
     let inRoom = true
     if (inRoom && user.id && location.latitude) {

@@ -20,12 +20,10 @@ class GoogleMapCard extends Component {
     for (let i = 0; i < points.length; i++) {
       bounds.extend(points[i]);
     }
-    console.log('fit bounds')
     map.fitBounds(bounds)
   }
 
   render() {
-    console.log('map render')
     const {restaurantData, userData} = this.props
 
     const points = userData.map(user => {
