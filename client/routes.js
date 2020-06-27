@@ -14,7 +14,7 @@ import {
   ChatRoom,
   RoomMaster,
   NewRoomHome,
-  GoogleMapCard
+  GoogleMapCard,
 } from './components'
 import {me} from './store'
 
@@ -33,6 +33,7 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/" component={LandingPage} />
+        <Route exact path="/me" component={UserHome} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/google" component={GoogleMapCard} />
@@ -44,7 +45,6 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/restaurants" component={RestaurantsView} />
-            {/* <Route exact path="/roomhome" component={NewRoomHome} /> */}
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
