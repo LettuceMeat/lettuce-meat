@@ -26,8 +26,12 @@ export default function Nav() {
             {user.userName ? `(${user.userName}) ` : ''}Login / Signup
           </Link>
         )}
-        <span className="navDivider" />|<span className="navDivider" />
-        <Link to="/">Sponsored</Link>
+        {user.isAdmin ? (
+          <>
+            <span className="navDivider" />|<span className="navDivider" />
+            <Link to="/admin">Admin</Link>
+          </>
+        ) : null}
       </div>
       <div className="navRight">{roomId && <Link to="/">Copy Link</Link>}</div>
     </div>
