@@ -18,11 +18,11 @@ export default function Nav() {
   return (
     <div className="nav lightFontSmall">
       <div className="navLeft">
-        <Link to="/">Home</Link>
+        <Link to="/home">Home</Link>
         <span className="navDivider" />|<span className="navDivider" />
         {user.email ? (
           <span>
-            <Link to="/">{user.email}</Link>
+            <Link to="/me">{user.email}</Link>
             <span className="navDivider" />|<span className="navDivider" />
             <a href="#" onClick={() => dispatch(logout())}>
               Logout
