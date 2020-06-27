@@ -29,6 +29,9 @@ export default function RoomMaster() {
     }
 
     socket.emit('join', roomId)
+
+    axios.post(`/api/messages/${roomId}`, {message: `${user.userName} has joined the room`})
+
     socket.on('roomMessageReceive', content => {
       dispatch(createMessage(content))
     })

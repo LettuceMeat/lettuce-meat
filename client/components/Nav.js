@@ -8,6 +8,13 @@ export default function Nav() {
   const dispatch = useDispatch()
   const match = useRouteMatch('/room/:roomId')
   const roomId = match ? match.params.roomId : null
+
+  const copyCodeToClipboard = () => {
+    const el = this.textArea
+    el.select()
+    document.execCommand('copy')
+  }
+
   return (
     <div className="nav lightFontSmall">
       <div className="navLeft">
@@ -29,7 +36,6 @@ export default function Nav() {
         <span className="navDivider" />|<span className="navDivider" />
         <Link to="/">Sponsored</Link>
       </div>
-      <div className="navRight">{roomId && <Link to="/">Copy Link</Link>}</div>
     </div>
   )
 }

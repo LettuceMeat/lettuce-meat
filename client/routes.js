@@ -14,7 +14,8 @@ import {
   ChatRoom,
   RoomMaster,
   NewRoomHome,
-  GoogleMapCard
+  GoogleMapCard,
+  GuestSignup
 } from './components'
 import {me} from './store'
 
@@ -31,24 +32,14 @@ class Routes extends Component {
 
     return (
       <Switch>
-        {/* Routes placed here are available to all visitors */}
+        {isLoggedIn && <Route exact path="/room/:roomId?/roomHome" component={RoomMaster} />}
         <Route exact path="/" component={LandingPage} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/google" component={GoogleMapCard} />
         <Route exact path="/room/:roomId?" component={NewRoomHome} />
-        <Route exact path="/room/:roomId?/roomHome" component={RoomMaster} />
+        <Route exact path="/room/:roomId?/roomHome" component={GuestSignup} />
         <Route exact path="/home" component={HomePage} />
         <Route exact path="/chatroom" component={ChatRoom} />
-        {isLoggedIn && (
-          <Switch>
-            {/* Routes placed here are only available after logging in */}
-            <Route exact path="/restaurants" component={RestaurantsView} />
-            {/* <Route exact path="/roomhome" component={NewRoomHome} /> */}
-          </Switch>
-        )}
-        {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
       </Switch>
     )
   }
