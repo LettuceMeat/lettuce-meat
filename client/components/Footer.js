@@ -19,8 +19,8 @@ export default function Footer() {
 
         <div className='footerPerson darkFontMedium'>
           <span className='footerName'>Jonathan Cordero</span>
-          <Link className='darkFontSmall' to="/">LinkedIn</Link>
-          <Link className='darkFontSmall' to="/">Github</Link>
+          <a className='darkFontSmall' href="https://www.linkedin.com/in/jonathancordero7/">LinkedIn</a>
+          <a className='darkFontSmall' href="https://github.com/Cryptcur">Github</a>
         </div>
 
         <div className='footerPerson darkFontMedium'>

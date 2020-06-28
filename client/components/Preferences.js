@@ -35,7 +35,6 @@ const Preferences = ({roomUsers}) => {
   const handlePriceRangeChange = ev => {
     setPriceRange(() => [...priceRange, ev.target.value])
   }
-  console.log(categories)
   const styles = useStyles()
   return (
     <form className={styles.preferences} onSubmit={ev => ev.preventDefault()}>
