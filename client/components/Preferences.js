@@ -25,23 +25,40 @@ const Preferences = ({roomUsers, center, getRestaurants}) => {
   const [categories, setCategories] = useState([])
   const [priceRange, setPriceRange] = useState([])
   const [apiSearch, restaurants, error] = findRestaurants()
+  console.log('CATEGORIES', categories)
+  console.log('RESTAURANTS', restaurants)
 
   //Todo: have users choose 1 of each preference
   //When all users select their preference, make the api call
 
   const handleCategoriesChange = ev => {
-    setCategories(() => [ev.target.value])
+    setCategories(() => [...categories, ev.target.value])
   }
   const handlePriceRangeChange = ev => {
-    setPriceRange(() => [ev.target.value])
+    setPriceRange(() => [...priceRange, ev.target.value])
   }
 
   useEffect(() => {
     if (categories.length && priceRange.length === roomUsers.length) {
-      let cat = categories.join('')
+      let cat = categories
+        .reduce((acc, category) => {
+          if (!acc.includes(category)) {
+            acc.push(category)
+          }
+          return acc
+        }, [])
+        .join(',')
+      let uniquePrice = priceRange
+        .reduce((acc, price) => {
+          if (!acc.includes(price)) {
+            acc.push(price)
+          }
+          return acc
+        }, [])
+        .join(',')
       const search = {
         categories: cat,
-        priceRange: priceRange[0],
+        priceRange: uniquePrice,
         latitude: center.lat,
         longitude: center.lng
       }
