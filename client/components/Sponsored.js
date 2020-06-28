@@ -32,9 +32,9 @@ class Sponsored extends Component {
                 <div className='adminRight'>
                     <p>Add form</p>
                     <form>
+                        <input type='text' placeholder='restaurant name' />
                         <input type='text' placeholder='yelp ID' />
-                        <input type='checkbox' placeholder='check' />
-                        <input type='date' placeholder='expires' />
+                        <input type='date' />
                         <button onSubmit={() => {}} >Submit</button>
                     </form>
                 </div>
