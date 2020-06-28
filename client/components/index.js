@@ -4,7 +4,7 @@
  * having to figure out which file they belong to!
  */
 export {default as Navbar} from './navbar'
-export {default as UserHome} from './user-home'
+export {default as UserHome} from './UserHome'
 export {Login, Signup} from './auth-form'
 export {default as Header} from './Header'
 export {default as LandingPage} from './LandingPage'
@@ -18,3 +18,4 @@ export {default as NewRoomHome} from './NewRoomHome'
 export {default as GoogleMapCard} from './GoogleMapCard'
 export {default as Preferences} from './Preferences'
 export {default as Nav} from './Nav'
+export {default as GuestSignup} from './GuestSignup'

@@ -8,10 +8,12 @@ export default class NewRoomHome extends Component {
     el.select()
     document.execCommand('copy')
   }
-  goToRoomHome = async () => {
+
+  goToRoomHome = () => {
     const roomId = this.props.match.params.roomId
     history.push(`/room/${roomId}/roomHome`)
   }
+
   render() {
     const roomId = this.props.match.params.roomId
     return (
@@ -23,7 +25,7 @@ export default class NewRoomHome extends Component {
           <div>
             <textarea
               ref={textarea => (this.textArea = textarea)}
-              value={`www.lettuce-meat.com/${roomId}`}
+              value={`lettucemeat.app/room/${roomId}/roomHome`}
               readOnly={true}
             />
           </div>
