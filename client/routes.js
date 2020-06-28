@@ -14,7 +14,9 @@ import {
   ChatRoom,
   RoomMaster,
   NewRoomHome,
-  Sponsored
+  Sponsored,
+  GoogleMapCard,
+  GuestSignup,
 } from './components'
 import {me} from './store'
 
@@ -31,13 +33,13 @@ class Routes extends Component {
 
     return (
       <Switch>
-        {/* Routes placed here are available to all visitors */}
-        <Route exact path="/asdf" component={Rooms} />
+        {isLoggedIn && <Route exact path="/room/:roomId?/roomHome" component={RoomMaster} />}
         <Route exact path="/" component={LandingPage} />
+        <Route exact path="/me" component={UserHome} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route exact path="/room/:roomId?" component={NewRoomHome} />
-        <Route exact path="/room/:roomId?/roomHome" component={RoomMaster} />
+        <Route exact path="/room/:roomId?/roomHome" component={GuestSignup} />
         <Route exact path="/home" component={HomePage} />
         <Route exact path="/chatroom" component={ChatRoom} />
         {isLoggedIn && (

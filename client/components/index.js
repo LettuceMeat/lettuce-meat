@@ -4,7 +4,7 @@
  * having to figure out which file they belong to!
  */
 export {default as Navbar} from './navbar'
-export {default as UserHome} from './user-home'
+export {default as UserHome} from './UserHome'
 export {Login, Signup} from './auth-form'
 export {default as Header} from './Header'
 export {default as LandingPage} from './LandingPage'
@@ -15,5 +15,7 @@ export {default as ChatRoom} from './ChatRoom'
 export {default as RoomMaster} from './RoomMaster'
 export {default as Phase1BottomNav} from './Phase1BottomNav'
 export {default as NewRoomHome} from './NewRoomHome'
+export {default as GoogleMapCard} from './GoogleMapCard'
 export {default as Nav} from './Nav'
 export {default as Sponsored} from './Sponsored'
+export {default as GuestSignup} from './GuestSignup'

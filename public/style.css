@@ -19,8 +19,22 @@
 .green4 {
   color: #a9c7b5;
 }
+
+.green5 {
+  color: #646665;
+}
 .red {
   color: rgb(119, 67, 48);
+}
+
+.mapContainer {
+  position: relative;
+  height: 300px;
+  border-radius: 1rem;
+}
+
+.chatContainer {
+  width: 400px;
 }
 
 .logoFont {
@@ -78,7 +92,7 @@ a {
 .mainCard {
   background-color: white;
   margin: 0 20%;
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 1rem;
   box-shadow: 0 0 25px 10px #00000048;
 }
@@ -221,7 +235,7 @@ a:active {
   list-style-type: none;
   margin: 10px;
   padding: 5px 15px 5px 15px;
-  width: 70%;
+  width: 80%;
 }
 .chatList > .textLeft {
   align-self: flex-start;
@@ -231,7 +245,7 @@ a:active {
   margin: 10px;
   margin-left: -35px;
   padding: 5px 15px 5px 15px;
-  width: 70%;
+  width: 80%;
 }
 .chatList > .avatarRight {
   align-self: flex-end;

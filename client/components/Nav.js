@@ -8,14 +8,21 @@ export default function Nav() {
   const dispatch = useDispatch()
   const match = useRouteMatch('/room/:roomId')
   const roomId = match ? match.params.roomId : null
+
+  const copyCodeToClipboard = () => {
+    const el = this.textArea
+    el.select()
+    document.execCommand('copy')
+  }
+
   return (
     <div className="nav lightFontSmall">
       <div className="navLeft">
-        <Link to="/">Home</Link>
+        <Link to="/home">Home</Link>
         <span className="navDivider" />|<span className="navDivider" />
         {user.email ? (
           <span>
-            <Link to="/">{user.email}</Link>
+            <Link to="/me">{user.email}</Link>
             <span className="navDivider" />|<span className="navDivider" />
             <a href="#" onClick={() => dispatch(logout())}>
               Logout
@@ -33,7 +40,6 @@ export default function Nav() {
           </>
         ) : null}
       </div>
-      <div className="navRight">{roomId && <Link to="/">Copy Link</Link>}</div>
     </div>
   )
 }
