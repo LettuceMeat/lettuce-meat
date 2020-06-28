@@ -40,7 +40,6 @@ class Sponsored extends Component {
 }
 
 const mapStateToProps = state => {
-    console.log(state);
     return {
         sponsoredRestaurants: state.restaurants
     }
