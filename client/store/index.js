@@ -67,6 +67,8 @@ const roomUsersReducer = (state = [], action) => {
           })
         }
         return [...state, action.initializedUser]
+    default:
+      return state
   }
 }
 
