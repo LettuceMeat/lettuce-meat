@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {Header, Nav} from './components'
+import {Header, Nav, Footer} from './components'
 import Routes from './routes'
 
 const App = () => {
@@ -12,6 +12,7 @@ const App = () => {
         <div className="mainCard">
           <Routes />
         </div>
+        <Footer />
       </div>
     </div>
   )
