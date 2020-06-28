@@ -294,3 +294,23 @@ textarea {
 #roomCodeContainer {
   color: white;
 }
+#userUpdateForm {
+  display: flex;
+  /* width: 50%; */
+  flex-direction: column;
+  background-color: aliceblue;
+}
+#userUpdateForm > * {
+  margin: 10px;
+}
+#userUpdateForm > button {
+  border: none;
+  background-color: rgb(17, 82, 147);
+  color: white;
+  height: 30px;
+}
+
+#userHomeWrapper {
+  display: flex;
+  justify-content: space-evenly;
+}

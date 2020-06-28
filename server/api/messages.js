@@ -30,3 +30,9 @@ router.post('/:roomId', async (req, res, next) => {
     next(error)
   }
 })
+
+router.get('/', (req, res, next) => {
+  Message.findAll({include: [User]})
+    .then(message => res.send(message))
+    .catch(next)
+})

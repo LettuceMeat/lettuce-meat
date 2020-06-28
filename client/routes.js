@@ -15,11 +15,9 @@ import {
   RoomMaster,
   NewRoomHome,
   GoogleMapCard,
-  GuestSignup
-
 } from './components'
 import {me} from './store'
-
+//import {thunkLoadAllMessages} from './store/thunks'
 /**
  * COMPONENT
  */
@@ -33,13 +31,14 @@ class Routes extends Component {
 
     return (
       <Switch>
-        {isLoggedIn && <Route exact path="/room/:roomId?/roomHome" component={RoomMaster} />}
+        {/* Routes placed here are available to all visitors */}
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/me" component={UserHome} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route path="/google" component={GoogleMapCard} />
         <Route exact path="/room/:roomId?" component={NewRoomHome} />
-        <Route exact path="/room/:roomId?/roomHome" component={GuestSignup} />
+        <Route exact path="/room/:roomId?/roomHome" component={RoomMaster} />
         <Route exact path="/home" component={HomePage} />
         <Route exact path="/chatroom" component={ChatRoom} />
         {isLoggedIn && (
@@ -62,7 +61,8 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    user: state.user
   }
 }
 
@@ -70,6 +70,7 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me())
+      // dispatch(thunkLoadAllMessages())
     }
   }
 }

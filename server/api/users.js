@@ -11,6 +11,7 @@ router.get('/', async (req, res, next) => {
       // send everything to anyone who asks!
       attributes: ['id', 'email']
     })
+    console.log(users, 'users from api')
     res.json(users)
   } catch (err) {
     next(err)
@@ -59,4 +60,26 @@ router.put('/initialize/:userId/:roomId', async (req, res, next) => {
       .emit('roomUserReceive', user)
   }
   res.json(user)
+})
+
+router.put('/:id', (req, res, next) => {
+  console.log(req.user.id, 'REQ BODY HEREEEEEE') 
+  //issue with req.params, id is undefined
+  User.findByPk(req.user.id)
+    .then(user => 
+      user.update({
+        userName: req.body.userName,
+        email: req.body.email,
+        password: req.body.password
+      })
+    )
+    .then(updatedUser => res.send(updatedUser))
+    .catch(next)
+  // try {
+  //   const user = await User.findByPk(req.params.id)
+  //   await user.save()
+  //   res.sendStatus(204)
+  // } catch (error) {
+  //   next(error)
+  // }
 })
