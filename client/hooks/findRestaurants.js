@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import axios from 'axios'
 
 export default () => {
@@ -20,6 +20,5 @@ export default () => {
       setError('Something went wrong requesting restaurants', ex)
     }
   }
-
   return [apiSearch, restaurants, error]
 }

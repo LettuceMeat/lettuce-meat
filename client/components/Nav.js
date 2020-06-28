@@ -27,6 +27,12 @@ export default function Nav() {
             {user.userName ? `(${user.userName}) ` : ''}Login / Signup
           </Link>
         )}
+        {user.isAdmin ? (
+          <>
+            <span className="navDivider" />|<span className="navDivider" />
+            <Link to="/admin">Admin</Link>
+          </>
+        ) : null}
         <span className="navDivider" />|<span className="navDivider" />
         <Link to="/">About</Link>
       </div>

@@ -9,6 +9,7 @@ import ChatRoom from './ChatRoom'
 import GoogleMapCard from './GoogleMapCard'
 import axios from 'axios'
 import {averageUserLocation} from '../../script/utils'
+import Preferences from './Preferences'
 
 export default function RoomMaster() {
   const [center, setCenter] = useState({lat: 0, lng: 0})
@@ -45,29 +46,38 @@ export default function RoomMaster() {
   //calculate the rooms center every time the roomusers updates
   useEffect(() => {
     let inRoom = true
-      inRoom && roomUsers && setCenter(averageUserLocation(roomUsers))
-    return () => {inRoom = false}
+    inRoom && roomUsers && setCenter(averageUserLocation(roomUsers))
+    return () => {
+      inRoom = false
+    }
   }, [roomUsers])
 
   //once we have the user and location put it to the db and send to sockets
   useEffect(() => {
     let inRoom = true
     if (inRoom && user.id && location.latitude) {
-      const locationData = {lat: location.latitude*1, lng: location.longitude*1}
+      const locationData = {
+        lat: location.latitude * 1,
+        lng: location.longitude * 1
+      }
       axios.put(`/api/users/initialize/${user.id}/${roomId}`, locationData)
     }
-    return () => {inRoom = false}
+    return () => {
+      inRoom = false
+    }
   }, [user, location])
 
-  const sendMessage = message => axios.post(`/api/messages/${roomId}`, {message})
+  const sendMessage = message =>
+    axios.post(`/api/messages/${roomId}`, {message})
 
   return (
     <div>
-      <div className='mapContainer'>
-       {roomUsers.length && <GoogleMapCard userData={roomUsers}/>}
+      <div className="mapContainer">
+        {roomUsers.length && <GoogleMapCard userData={roomUsers} />}
       </div>
-      <div className='chatContainer'>
+      <div className="chatContainer">
         <ChatRoom roomId={roomId} sendMessage={sendMessage} />
+        <Preferences roomUsers={roomUsers} />
       </div>
     </div>
   )

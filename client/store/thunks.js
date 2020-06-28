@@ -1,5 +1,15 @@
 import axios from 'axios'
-import {loadMessages, createMessage, loadRoom, loadRoomUsers, updateUserRoom, updateUserLoc, initUser} from './actions'
+import {loadMessages, createMessage, loadRoom, loadRoomUsers, updateUserRoom, updateUserLoc, initUser, loadRestaurants, createRestaurant} from './actions'
+
+const getSponsoredRestaurants = () => async dispatch => {
+  const sponsoredRestaurants = (await axios.get(`/api/restaurants`)).data;
+  return dispatch(loadRestaurants(sponsoredRestaurants))
+}
+
+const thunkCreateRestaurant = restaurant => async dispatch => {
+  const _restaurant = (await axios.post('/api/restaurants', restaurant)).data;
+  return dispatch(createRestaurant(_restaurant))
+}
 
 const thunkLoadMessages = roomId => async dispatch => {
   const messages = (await axios.get(`/api/messages/${roomId}`)).data
@@ -38,5 +48,14 @@ const thunkInitUser = (user, roomId, loc) => async dispatch => {
   return dispatch(initUser(initializedUser))
 }
 
-
-export {thunkLoadMessages, thunkCreateMessage, thunkLoadRoom, thunkLoadRoomUsers, thunkUpdateUserRoom, thunkUpdateUserLoc, thunkInitUser}
+export {
+  thunkLoadMessages,
+  thunkCreateMessage,
+  thunkLoadRoom,
+  thunkLoadRoomUsers,
+  thunkUpdateUserRoom,
+  thunkUpdateUserLoc,
+  thunkInitUser,
+  thunkCreateRestaurant,
+  getSponsoredRestaurants,
+}
