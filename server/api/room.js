@@ -1,14 +1,17 @@
 const router = require('express').Router()
 const {Message, User, Room} = require('../db/models')
-const socket = require('../socket')
 module.exports = router
 
 router.get('/:roomId', async (req, res, next) => {
-  const room = await Room.findAll({
-    where: {name: req.params.roomId},
-    include: [User, Message]
-  })
-  res.json(room)
+  try {
+    const room = await Room.findAll({
+      where: {name: req.params.roomId},
+      include: [User, Message]
+    })
+    res.json(room)
+  } catch (error) {
+    console.log(error)
+  }
 })
 
 router.post('/:roomId', async (req, res, next) => {

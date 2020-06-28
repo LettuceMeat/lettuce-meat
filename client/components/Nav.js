@@ -9,12 +9,6 @@ export default function Nav() {
   const match = useRouteMatch('/room/:roomId')
   const roomId = match ? match.params.roomId : null
 
-  const copyCodeToClipboard = () => {
-    const el = this.textArea
-    el.select()
-    document.execCommand('copy')
-  }
-
   return (
     <div className="nav lightFontSmall">
       <div className="navLeft">
@@ -34,7 +28,7 @@ export default function Nav() {
           </Link>
         )}
         <span className="navDivider" />|<span className="navDivider" />
-        <Link to="/">Sponsored</Link>
+        <Link to="/">About</Link>
       </div>
     </div>
   )

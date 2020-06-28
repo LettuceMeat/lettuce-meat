@@ -23,22 +23,19 @@ export default function RoomMaster() {
   //on mount - load data, join socket room, set up socket to receive
   useEffect(() => {
     let inRoom = true
+    socket.emit('join', roomId)
     if (inRoom) {
       dispatch(thunkLoadMessages(roomId))
       dispatch(thunkLoadRoomUsers(roomId))
+      axios.post(`/api/messages/${roomId}`, {message: `${user.userName} has joined the room`})
     }
 
-    socket.emit('join', roomId)
-
-    axios.post(`/api/messages/${roomId}`, {message: `${user.userName} has joined the room`})
-
     socket.on('roomMessageReceive', content => {
-      dispatch(createMessage(content))
+      inRoom && dispatch(createMessage(content))
     })
     socket.on('roomUserReceive', user => {
-      dispatch(initUser(user))
+      inRoom && dispatch(initUser(user))
     })
-
     return () => {
       inRoom = false
       socket.emit('leave', roomId)
