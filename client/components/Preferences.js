@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import FormControl from '@material-ui/core/FormControl'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import InputLabel from '@material-ui/core/InputLabel'
@@ -21,10 +21,10 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const Preferences = ({roomUsers}) => {
+const Preferences = ({roomUsers, center, getRestaurants}) => {
   const [categories, setCategories] = useState([])
   const [priceRange, setPriceRange] = useState([])
-  const [apiSearch] = findRestaurants()
+  const [apiSearch, restaurants, error] = findRestaurants()
 
   //Todo: have users choose 1 of each preference
   //When all users select their preference, make the api call
@@ -33,9 +33,28 @@ const Preferences = ({roomUsers}) => {
     setCategories(() => [ev.target.value])
   }
   const handlePriceRangeChange = ev => {
-    setPriceRange(() => [...priceRange, ev.target.value])
+    setPriceRange(() => [ev.target.value])
   }
-  console.log(categories)
+
+  useEffect(() => {
+    if (categories.length && priceRange.length === roomUsers.length) {
+      let cat = categories.join('')
+      const search = {
+        categories: cat,
+        priceRange: priceRange[0],
+        latitude: center.lat,
+        longitude: center.lng
+      }
+      apiSearch(search)
+    }
+  }, [categories, priceRange, roomUsers])
+
+  useEffect(() => {
+    if (restaurants.length) {
+      getRestaurants(restaurants)
+    }
+  }, [restaurants])
+
   const styles = useStyles()
   return (
     <form className={styles.preferences} onSubmit={ev => ev.preventDefault()}>
@@ -56,10 +75,10 @@ const Preferences = ({roomUsers}) => {
       <FormControl className={styles.formControl}>
         <InputLabel id="input-price">Price Range</InputLabel>
         <Select value="" onChange={handlePriceRangeChange}>
-          <MenuItem value="$">$</MenuItem>
-          <MenuItem value="$$">$$</MenuItem>
-          <MenuItem value="$$$">$$$</MenuItem>
-          <MenuItem value="$$$$">$$$$</MenuItem>
+          <MenuItem value="1">$</MenuItem>
+          <MenuItem value="2">$$</MenuItem>
+          <MenuItem value="3">$$$</MenuItem>
+          <MenuItem value="4">$$$$</MenuItem>
         </Select>
         <FormHelperText>Choose Price Range</FormHelperText>
       </FormControl>

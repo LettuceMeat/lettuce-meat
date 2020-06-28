@@ -13,6 +13,7 @@ import Preferences from './Preferences'
 
 export default function RoomMaster() {
   const [center, setCenter] = useState({lat: 0, lng: 0})
+  const [restaurantData, setRestaurantData] = useState([])
   const user = useSelector(state => state.user)
   const roomUsers = useSelector(state => state.roomUsers)
   const dispatch = useDispatch()
@@ -31,7 +32,9 @@ export default function RoomMaster() {
 
     socket.emit('join', roomId)
 
-    axios.post(`/api/messages/${roomId}`, {message: `${user.userName} has joined the room`})
+    axios.post(`/api/messages/${roomId}`, {
+      message: `${user.userName} has joined the room`
+    })
 
     socket.on('roomMessageReceive', content => {
       dispatch(createMessage(content))
@@ -73,6 +76,10 @@ export default function RoomMaster() {
   const sendMessage = message =>
     axios.post(`/api/messages/${roomId}`, {message})
 
+  const getRestaurants = restaurants => {
+    setRestaurantData(restaurants)
+  }
+
   return (
     <div>
       <div className="mapContainer">
@@ -80,7 +87,11 @@ export default function RoomMaster() {
       </div>
       <div className="chatContainer">
         <ChatRoom roomId={roomId} sendMessage={sendMessage} />
-        <Preferences roomUsers={roomUsers} />
+        <Preferences
+          roomUsers={roomUsers}
+          center={center}
+          getRestaurants={getRestaurants}
+        />
       </div>
     </div>
   )

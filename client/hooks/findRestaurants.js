@@ -12,7 +12,8 @@ export default () => {
         categories: search.categories || '',
         latitude: search.latitude || 0,
         longitude: search.longitude || 0,
-        radius: 1500
+        radius: 1500,
+        price: search.priceRange || '1,2'
       })
       setRestaurants(response.data)
     } catch (ex) {
