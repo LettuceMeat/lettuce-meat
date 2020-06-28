@@ -3,7 +3,7 @@ import {createLogger} from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
-import {LOAD_MESSAGES, CREATE_MESSAGE} from './constants'
+import {LOAD_MESSAGES, CREATE_MESSAGE, LOAD_RESTAURANTS} from './constants'
 
 const messageReducer = (state = [], action) => {
   switch (action.type) {
@@ -19,10 +19,21 @@ const messageReducer = (state = [], action) => {
   }
 }
 
+const restaurantReducer = (state=[], action) => {
+  switch (action.type) {
+    case LOAD_RESTAURANTS:
+      return action.restaurants
+    default:
+      return state
+  }
+}
+
 const reducer = combineReducers({
   user,
-  messages: messageReducer
+  messages: messageReducer,
+  restaurants: restaurantReducer,
 })
+
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )

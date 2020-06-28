@@ -3,18 +3,40 @@ import {getSponsoredRestaurants} from '../store/thunks'
 import { connect } from 'react-redux'
 
 class Sponsored extends Component {
-    constructor() {
-        super()
-        this.state = {}
+    constructor(props) {
+        super(props)
+        this.state = {};
     }
+
+    componentDidMount() {
+        this.props.get();
+    }
+
     render() {
+        const {sponsoredRestaurants} = this.props;
         return (
             <div className='adminContainer'>
                 <div className='adminLeft'>
-                    Sponsored
+                    <p>Sponsored</p>
+                    {sponsoredRestaurants && sponsoredRestaurants.map(restaurant => {
+                        return (
+                            <>
+                                <div>Name: {restaurant.name}</div>
+                                <div>Yelp ID: {restaurant.yelpId}</div>
+                                <div>Expiration Date: {restaurant.sponsorshipExpiration.slice(0, 10)}</div>
+                                <br />
+                            </>
+                        )
+                    })}
                 </div>
                 <div className='adminRight'>
-                    Add form
+                    <p>Add form</p>
+                    <form>
+                        <input type='text' placeholder='yelp ID' />
+                        <input type='checkbox' placeholder='check' />
+                        <input type='date' placeholder='expires' />
+                        <button onSubmit={() => {}} >Submit</button>
+                    </form>
                 </div>
             </div>
         )
@@ -22,14 +44,15 @@ class Sponsored extends Component {
 }
 
 const mapStateToProps = state => {
+    console.log(state);
     return {
-        sponsoredRestaurants: state.sponsoredRestaurants
+        sponsoredRestaurants: state.restaurants
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        get: () => dispatch(getSponsoredRestaurants)
+        get: () => dispatch(getSponsoredRestaurants())
     }
 }
 

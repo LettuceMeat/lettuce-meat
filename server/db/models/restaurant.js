@@ -13,6 +13,9 @@ const Restaurant = db.define('restaurant', {
   yelpId: {
     type: STRING,
   },
+  name: {
+    type: STRING,
+  },
   sponsored: {
     type: BOOLEAN,
     defaultValue: false

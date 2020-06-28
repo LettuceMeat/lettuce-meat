@@ -34,10 +34,10 @@ async function seed() {
   ])
   console.log('2 users created')
 
-  const [jjs, aji, jujube] = await Promise.all([
-    Restaurant.create({yelpId: 'k4QfaFoqtpEZ1LZylJZqww', sponsored: true, sponsorshipExpiration: 1596168000000}),
-    Restaurant.create({yelpId: 'u3JBjUgrCdxy6WF0tnX3SA', sponsored: true, sponsorshipExpiration: 1596168000000}),
-    Restaurant.create({yelpId: 'S7ivv5O0beH3U9cV3cRD_Q', sponsored: true, sponsorshipExpiration: 1596168000000}),
+  await Promise.all([
+    Restaurant.create({yelpId: 'k4QfaFoqtpEZ1LZylJZqww', name: 'JJ\'s Fusion', sponsored: true, sponsorshipExpiration: 1596168000000}),
+    Restaurant.create({yelpId: 'u3JBjUgrCdxy6WF0tnX3SA', name: 'Aji Sushi House', sponsored: true, sponsorshipExpiration: 1596168000000}),
+    Restaurant.create({yelpId: 'S7ivv5O0beH3U9cV3cRD_Q', name: 'Jujube Tree', sponsored: true, sponsorshipExpiration: 1596168000000}),
   ])
 
   const [preference1, preference2] = await Promise.all([
