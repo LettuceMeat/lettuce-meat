@@ -3,7 +3,7 @@ import {createLogger} from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
-import {LOAD_MESSAGES, CREATE_MESSAGE, LOAD_RESTAURANTS} from './constants'
+import {LOAD_MESSAGES, CREATE_MESSAGE, LOAD_RESTAURANTS, CREATE_RESTAURANT} from './constants'
 
 const messageReducer = (state = [], action) => {
   switch (action.type) {
@@ -23,6 +23,8 @@ const restaurantReducer = (state=[], action) => {
   switch (action.type) {
     case LOAD_RESTAURANTS:
       return action.restaurants
+    case CREATE_RESTAURANT:
+      return [...state, action.restaurant]
     default:
       return state
   }

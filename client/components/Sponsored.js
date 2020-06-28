@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {getSponsoredRestaurants} from '../store/thunks'
 import { connect } from 'react-redux'
+import RestaurantForm from './RestaurantForm'
 
 class Sponsored extends Component {
     constructor(props) {
@@ -31,12 +32,7 @@ class Sponsored extends Component {
                 </div>
                 <div className='adminRight'>
                     <p>Add form</p>
-                    <form>
-                        <input type='text' placeholder='restaurant name' />
-                        <input type='text' placeholder='yelp ID' />
-                        <input type='date' />
-                        <button onSubmit={() => {}} >Submit</button>
-                    </form>
+                    <RestaurantForm />
                 </div>
             </div>
         )

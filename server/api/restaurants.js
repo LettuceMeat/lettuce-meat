@@ -12,3 +12,17 @@ router.get('/', async (req, res, next) => {
         next(ex)
     }
 })
+
+router.post('/', async(req, res, next) => {
+    try {
+        const restaurant = await Restaurant.create({
+            name: req.body.name,
+            yelpId: req.body.yelpId,
+            sponsored: req.body.sponsored,
+            sponsorshipExpiration: req.body.sponsorshipExpiration
+        })
+        res.send(restaurant)
+    } catch (err) {
+        next(err)
+    }
+})
