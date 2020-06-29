@@ -39,19 +39,19 @@ router.put('/room/:userId/:roomId', async (req, res, next) => {
 })
 
 router.put('/initialize/:userId/:roomId', async (req, res, next) => {
-  const randLat = (Math.random() * 0.03)
-  const randLng = (Math.random() * 0.03)
-  const randLatneg = (Math.random() * 0.03)
-  const randLngneg = (Math.random() * 0.03)
+  // const randLat = (Math.random() * 0.03)
+  // const randLng = (Math.random() * 0.03)
+  // const randLatneg = (Math.random() * 0.03)
+  // const randLngneg = (Math.random() * 0.03)
 
-  const lat = req.body.lat + randLat - randLatneg
-  const lng = req.body.lng + randLng - randLngneg
+  // const lat = req.body.lat + randLat - randLatneg
+  // const lng = req.body.lng + randLng - randLngneg
   
   const user = await User.findByPk(req.params.userId)
   await user.update({
     roomName: req.params.roomId,
-    lat: lat*1,
-    lng: lng*1
+    lat: req.body.lat*1,
+    lng: req.body.lng*1
   })
   if (socket.getIO()) {
     socket

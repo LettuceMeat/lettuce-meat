@@ -1,6 +1,6 @@
 const crypto = require('crypto')
 const Sequelize = require('sequelize')
-const {UUID, UUIDV4, STRING, DECIMAL} = Sequelize
+const {UUID, UUIDV4, STRING, DECIMAL, BOOLEAN} = Sequelize
 const db = require('../db')
 
 // uuid
@@ -19,6 +19,10 @@ const uuidDef = {
 
 const User = db.define('user', {
   id: uuidDef,
+  isAdmin: {
+    type: BOOLEAN,
+    defaultValue: false,
+  },
   email: {
     type: STRING,
     unique: true

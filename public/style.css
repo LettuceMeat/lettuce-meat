@@ -1,10 +1,14 @@
 @font-face {
-  font-family: 'logoFont';
-  src: url('./lettuceMeatLogoFont.ttf');
+  font-family: "logoFont";
+  src: url("./lettuceMeatLogoFont.ttf");
 }
 @font-face {
-  font-family: 'lightFont';
-  src: url('./Roboto-Light.ttf');
+  font-family: "lightFont";
+  src: url("./Roboto-Light.ttf");
+}
+@font-face {
+  font-family: 'darkFont';
+  src: url('./Roboto-Bold.ttf');
 }
 
 .green1 {
@@ -33,8 +37,27 @@
   border-radius: 1rem;
 }
 
+.mainContainer {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 350px;
+  justify-content: center;
+}
+
+.mainContainer > * {
+  margin-bottom: 2rem;
+}
+
+.mainContainer > input {
+  text-align: center;
+  width: 150px;
+}
+
 .chatContainer {
-  width: 400px;
+  display: flex;
+  width: 100%;
 }
 
 .logoFont {
@@ -47,6 +70,31 @@
   font-family: lightFont;
   color: white;
   font-size: 1.5rem;
+}
+
+.darkFont {
+  font-family: darkFont;
+  color: black;
+  font-size: 1.5rem;
+}
+
+.darkFontMedium {
+  font-family: darkFont;
+  color: black;
+  font-size: 1rem;
+}
+
+.darkFontSmall {
+  font-family: lightFont;
+  color: black;
+  font-size: 0.8rem;
+}
+
+.textContainer {
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .lightFontSmall {
@@ -83,6 +131,33 @@ a {
   justify-content: space-between;
   margin: 0 0.5rem 1rem 0.5rem;
   padding: 0 1rem 1rem 1rem;
+}
+
+.footer {
+  text-decoration: none;
+  color: black;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 6rem 1rem 1rem 1rem;
+  padding: 0 1rem 1rem 1rem;
+}
+
+.footerPerson > a:link,
+.footerPerson > a:visited,
+.footerPerson > a:hover,
+.footerPerson > a:active {
+  color: black;
+  text-decoration: none;
+}
+
+.footerPerson {
+  display: flex;
+  flex-direction: column;
+}
+
+.footerPerson > * {
+  margin-top: 0.5rem;
 }
 
 .navRight {
@@ -152,16 +227,14 @@ body {
   overscroll-behavior-x: none;
   background-color: rgb(216, 216, 216);
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 .App {
@@ -200,6 +273,7 @@ a:active {
   color: rgb(44, 105, 85);
   text-decoration: none;
 }
+
 .nav > a:link,
 a:visited,
 a:hover,
@@ -207,6 +281,8 @@ a:active {
   color: white;
   text-decoration: none;
 }
+
+
 #icons {
   align-items: center;
   /* color: rgb(44, 105, 85); */
@@ -223,6 +299,11 @@ a:active {
   flex-direction: column;
   margin: 5px;
   padding: 5px;
+}
+#chatBox > ul {
+  height: 25rem;
+  overflow: scroll;
+  margin: 2rem;
 }
 .chatList {
   display: flex;
@@ -272,7 +353,7 @@ a:active {
   margin: 20px 0 20px 0;
 }
 #codeHomeWrapper {
-  height: 100vh;
+  height: 350px;
 }
 #roomCodeContainer > button {
   background-color: white;
@@ -283,7 +364,8 @@ textarea {
   margin-bottom: 20px;
   resize: none;
   text-align: center;
-  width: 300px;
+  border: none;
+  width: 500px;
 }
 #roomCodeContainer {
   align-items: center;
@@ -314,3 +396,8 @@ textarea {
   display: flex;
   justify-content: space-evenly;
 }
+/* #chatBox {
+  margin: 2rem;
+  height: 25rem;
+  overflow: scroll;
+} */

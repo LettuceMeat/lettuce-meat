@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import findRestaurants from '../hooks/findRestaurants'
+import {findRestaurants} from '../hooks/findRestaurants'
 import {CATEGORIES} from '../constants/categoryPreferences'
 import findLocation from '../hooks/getLocation'
 import RestaurantCard from './RestaurantCard'
@@ -25,7 +25,7 @@ const Rooms = () => {
   const styles = useStyles()
   const {roomId} = useParams()
   const [category, setCategory] = useState('')
-  // const [apiSearch, restaurants] = findRestaurants()
+  const [apiSearch, restaurants] = findRestaurants()
   const [getLocation, location] = findLocation()
   const submit = ev => {
     ev.preventDefault()

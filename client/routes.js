@@ -14,7 +14,10 @@ import {
   ChatRoom,
   RoomMaster,
   NewRoomHome,
+  Sponsored,
   GoogleMapCard,
+  GuestSignup,
+  JoinRoom
 } from './components'
 import {me} from './store'
 //import {thunkLoadAllMessages} from './store/thunks'
@@ -27,24 +30,35 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn} = this.props
+    const {isLoggedIn, isAdmin} = this.props
 
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        <Route exact path="/" component={LandingPage} />
+//         <Route exact path="/" component={LandingPage} />
+        {isLoggedIn && <Route exact path="/room/:roomId?/roomHome" component={RoomMaster} />}
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/home" component={HomePage} />
         <Route exact path="/me" component={UserHome} />
+        <Route path="/join" component={JoinRoom} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/google" component={GoogleMapCard} />
         <Route exact path="/room/:roomId?" component={NewRoomHome} />
-        <Route exact path="/room/:roomId?/roomHome" component={RoomMaster} />
-        <Route exact path="/home" component={HomePage} />
+//         <Route exact path="/room/:roomId?/roomHome" component={RoomMaster} />
         <Route exact path="/chatroom" component={ChatRoom} />
+        <Route exact path="/room/:roomId?/roomHome" component={GuestSignup} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
+            <Route exact path="/room/:roomId?/roomHome" component={RoomMaster} />
             <Route exact path="/restaurants" component={RestaurantsView} />
+            {/* <Route exact path="/roomhome" component={NewRoomHome} /> */}
+            {isAdmin && (
+              <Switch>
+                  <Route exact path="/admin" component={Sponsored} />
+              </Switch>
+            )}
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
@@ -61,8 +75,10 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id,
+
     user: state.user
+    isAdmin: state.user.isAdmin,
+    isLoggedIn: !!state.user.id,
   }
 }
 

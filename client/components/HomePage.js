@@ -6,6 +6,7 @@ import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRoun
 import GroupIcon from '@material-ui/icons/Group'
 import {generateRoomCode} from '../../script/utils'
 import history from '../history'
+import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles({
   container: {
@@ -13,7 +14,7 @@ const useStyles = makeStyles({
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'row',
-    height: '100vh',
+    height: '350px',
     justifyContent: 'center'
   },
   createButtonStyle: {
@@ -42,7 +43,7 @@ const HomePage = () => {
       </Button>
       <Button className={styles.createButtonStyle}>
         <GroupIcon />
-        Join Room
+        <Link to="/join">Join Room</Link>
       </Button>
     </div>
   )
