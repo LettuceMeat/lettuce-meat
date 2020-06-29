@@ -16,6 +16,9 @@ Room.hasMany(Message)
 Preference.belongsTo(User)
 User.hasMany(Preference)
 
+Preference.belongsTo(Room)
+Room.hasMany(Preference)
+
 module.exports = {
   User,
   Restaurant,

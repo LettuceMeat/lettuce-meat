@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-const {STRING, UUID, UUIDV4, ENUM} = Sequelize
+const {STRING, UUID, UUIDV4, INTEGER} = Sequelize
 const db = require('../db')
 
 const Preference = db.define('preference', {
@@ -13,7 +13,7 @@ const Preference = db.define('preference', {
     notEmpty: true
   },
   moneys: {
-    type: ENUM('$', '$$', '$$$', '$$$$')
+    type: STRING
   }
 })
 

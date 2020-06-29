@@ -55,8 +55,8 @@ async function seed() {
   ])
 
   const [preference1, preference2] = await Promise.all([
-    Preference.create({cuisine: 'Chinese', moneys: '$$', userId: cody.id}),
-    Preference.create({cuisine: 'Italian', moneys: '$$$', userId: murphy.id})
+    Preference.create({cuisine: 'Chinese', moneys: '2', userId: cody.id}),
+    Preference.create({cuisine: 'Italian', moneys: '1', userId: murphy.id})
   ])
   console.log('2 preferences created')
 

@@ -7,7 +7,6 @@ const axios = require('axios')
 module.exports = router
 
 router.post('/', async (req, res, next) => {
-  console.log('REQBODY', req.body)
   try {
     const output = await axios.get(
       `https://api.yelp.com/v3/businesses/search`,
@@ -19,8 +18,9 @@ router.post('/', async (req, res, next) => {
           limit: req.body.limit,
           categories: req.body.categories,
           latitude: req.body.latitude,
-          longitutde: req.body.longitude,
-          radius: req.body.radius
+          longitude: req.body.longitude,
+          radius: req.body.radius,
+          price: req.body.price
         }
       }
     )
