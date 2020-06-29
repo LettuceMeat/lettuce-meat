@@ -7,6 +7,7 @@ import findLocation from '../hooks/getLocation'
 import socket from '../socket'
 import ChatRoom from './ChatRoom'
 import GoogleMapCard from './GoogleMapCard'
+import RestaurantCard from './RestaurantCard'
 import axios from 'axios'
 import {averageUserLocation} from '../../script/utils'
 import Preferences from './Preferences'
@@ -98,6 +99,15 @@ export default function RoomMaster() {
           center={center}
           getRestaurants={getRestaurants}
         />
+      </div>
+      <div>
+        {restaurantData
+          ? restaurantData.map((restaurant, idx) => {
+              if (!restaurant.is_closed) {
+                return <RestaurantCard key={idx} restaurant={restaurant} />
+              }
+            })
+          : null}
       </div>
     </div>
   )
