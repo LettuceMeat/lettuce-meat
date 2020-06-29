@@ -1,5 +1,6 @@
 import axios from 'axios'
-import {loadMessages, createMessage, loadRoom, loadRoomUsers, updateUserRoom, updateUserLoc, initUser, loadRestaurants, createRestaurant, loadRoomRestaurants} from './actions'
+import {loadMessages, createMessage, loadRoom, loadRoomUsers, updateUserRoom, updateUserLoc, initUser, loadRestaurants, createRestaurant, loadRoomRestaurants, loadAllMessages} from './actions'
+
 
 const getSponsoredRestaurants = () => async dispatch => {
   const sponsoredRestaurants = (await axios.get(`/api/restaurants`)).data;
@@ -19,11 +20,15 @@ const thunkCreateMessage = (roomId, message) => async dispatch => {
   const newMessage = (await axios.post(`/api/messages/${roomId}`, {message}))
     .data
   dispatch(createMessage(newMessage))
-}
-
+} 
 const thunkLoadRoom = roomId => async dispatch => {
   const room = (await axios.get(`/api/room/${roomId}`)).data
   return dispatch(loadRoom(room))
+}
+
+const thunkLoadAllMessages = () => async dispatch => {
+  const allMesages = (await axios.get(`/api/messages`)).data
+  return dispatch(loadAllMessages(allMesages))
 }
 const thunkLoadRoomRestaurants = roomId => async dispatch => {
   const roomRes = (await axios.get(`/api/room/${roomId}/restaurants`)).data
@@ -62,5 +67,6 @@ export {
   thunkInitUser,
   thunkCreateRestaurant,
   getSponsoredRestaurants,
+  thunkLoadAllMessages,
   thunkLoadRoomRestaurants
 }
