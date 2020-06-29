@@ -61,7 +61,6 @@ export const logout = () => async dispatch => {
   }
 }
 export const thunkUpdateUser = user => async dispatch => {
-  console.log(user)
   const updatedUser = (await axios.put(`/api/users/${user.id}`, user)).data
   return dispatch(updateUser(updatedUser))
 }

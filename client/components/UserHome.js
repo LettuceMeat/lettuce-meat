@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import TextField from '@material-ui/core/TextField';
+import TextField from '@material-ui/core/TextField'
+import Container from '@material-ui/core/Container'
 import {thunkUpdateUser} from '../store/user'
 //import { UniqueConstraintError } from 'sequelize/types'
 import { thunkLoadAllMessages } from '../store/thunks'
@@ -37,21 +38,25 @@ class UserHome extends Component {
 
   render() {
     const {userName, email, password} = this.state
-    const {messages} = this.props
+    const {messages, user} = this.props
     const {updateUser} = this
     return (
       <div>
         <div>
-          <h3>Welcome, {this.props.email}</h3>
+          <h3 id='welcome'>Welcome {user.userName}!</h3>
         </div>
         <div id='userHomeWrapper'>
-          <div>
+          <div id='roomCardDiv'>
             <h5>go to old rooms</h5>
-            {messages && messages.map(message =>  {
-              return (
-                <div className='roomCard' key={message.id}>{message.roomName}</div>
-              )
-            })}
+            <div id='roomCardWrapper'>
+              {/* <Container maxWidth="sm" style={{margin: 0}}> */}
+                {messages && messages.map(message =>  {
+                  return (
+                    <div className='roomCard' key={message.id}><a href={`/room/${message.roomName}/roomHome`} >{message.roomName}</a></div>
+                  )
+                })}
+              {/* </Container> */}
+            </div>
           </div>
           <div>
             <h5>update your profile</h5>
@@ -76,7 +81,7 @@ const mapState = state => {
   return {
     user: state.user,
     email: state.user.email,
-    messages: state.messages.filter(message => message.content.includes(state.user.userName))
+    messages: state.messages.filter(message => message.content.includes(`${state.user.userName} has joined the room`))
   }
 }
 const mapDispatch = (dispatch) => {
