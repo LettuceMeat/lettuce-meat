@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import FormControl from '@material-ui/core/FormControl'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import InputLabel from '@material-ui/core/InputLabel'
@@ -7,6 +7,9 @@ import MenuItem from '@material-ui/core/MenuItem'
 import {makeStyles} from '@material-ui/core/styles'
 import {CATEGORIES} from '../constants/categoryPreferences'
 import findRestaurants from '../hooks/findRestaurants'
+import {useSelector} from 'react-redux'
+import axios from 'axios'
+import Button from '@material-ui/core/Button'
 
 const useStyles = makeStyles(theme => ({
   formControl: {
@@ -21,20 +24,37 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const Preferences = ({roomUsers}) => {
+const Preferences = ({roomUsers, center, getRestaurants, roomId}) => {
   const [categories, setCategories] = useState([])
   const [priceRange, setPriceRange] = useState([])
-  const [apiSearch] = findRestaurants()
+  const user = useSelector(state => state.user)
+  const [apiSearch, restaurants, error] = findRestaurants()
 
   //Todo: have users choose 1 of each preference
   //When all users select their preference, make the api call
 
   const handleCategoriesChange = ev => {
-    setCategories(() => [ev.target.value])
+    setCategories(() => [...categories, ev.target.value])
   }
   const handlePriceRangeChange = ev => {
     setPriceRange(() => [...priceRange, ev.target.value])
   }
+
+  useEffect(() => {
+    if (restaurants.length) {
+      getRestaurants(restaurants)
+    }
+  }, [restaurants])
+
+  const sendPreference = () => {
+  const preference = {
+    cuisine: categories[0],
+    moneys: priceRange[0],
+    center: center
+  }
+  axios.post(`/api/submit/${roomId}/${user.id}`, {preference})
+}
+
   const styles = useStyles()
   return (
     <form className={styles.preferences} onSubmit={ev => ev.preventDefault()}>
@@ -55,12 +75,13 @@ const Preferences = ({roomUsers}) => {
       <FormControl className={styles.formControl}>
         <InputLabel id="input-price">Price Range</InputLabel>
         <Select value="" onChange={handlePriceRangeChange}>
-          <MenuItem value="$">$</MenuItem>
-          <MenuItem value="$$">$$</MenuItem>
-          <MenuItem value="$$$">$$$</MenuItem>
-          <MenuItem value="$$$$">$$$$</MenuItem>
+          <MenuItem value="1">$</MenuItem>
+          <MenuItem value="2">$$</MenuItem>
+          <MenuItem value="3">$$$</MenuItem>
+          <MenuItem value="4">$$$$</MenuItem>
         </Select>
         <FormHelperText>Choose Price Range</FormHelperText>
+        <Button onClick={() => sendPreference()}>Submit</Button>
       </FormControl>
     </form>
   )
