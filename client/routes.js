@@ -34,8 +34,7 @@ class Routes extends Component {
 
     return (
       <Switch>
-        {/* Routes placed here are available to all visitors */}
-//         <Route exact path="/" component={LandingPage} />
+        <Route exact path="/" component={LandingPage} />
         {isLoggedIn && <Route exact path="/room/:roomId?/roomHome" component={RoomMaster} />}
         <Route exact path="/" component={HomePage} />
         <Route exact path="/home" component={HomePage} />
@@ -45,7 +44,6 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route path="/google" component={GoogleMapCard} />
         <Route exact path="/room/:roomId?" component={NewRoomHome} />
-//         <Route exact path="/room/:roomId?/roomHome" component={RoomMaster} />
         <Route exact path="/chatroom" component={ChatRoom} />
         <Route exact path="/room/:roomId?/roomHome" component={GuestSignup} />
         {isLoggedIn && (
@@ -76,7 +74,7 @@ const mapState = state => {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
 
-    user: state.user
+    user: state.user,
     isAdmin: state.user.isAdmin,
     isLoggedIn: !!state.user.id,
   }
