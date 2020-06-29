@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {auth} from '../store'
+import Button from '@material-ui/core/Button'
 
 
 export default function GuestSignup() {
@@ -12,11 +13,11 @@ export default function GuestSignup() {
   }
 
   return (
-    <div>
-      <input onChange={ev => setName(ev.target.value)} />
-      <button type="button" onClick={() => create()}>
+    <div className="mainContainer">
+      <input className="darkFont" onChange={ev => setName(ev.target.value)} />
+      <Button type="button" onClick={() => create()}>
         create a guest
-      </button>
+      </Button>
     </div>
   )
 }

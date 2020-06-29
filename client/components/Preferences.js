@@ -40,34 +40,6 @@ const Preferences = ({roomUsers, center, getRestaurants, roomId}) => {
     setPriceRange(() => [...priceRange, ev.target.value])
   }
 
-  // useEffect(() => {
-  //   if (categories.length && priceRange.length === roomUsers.length) {
-  //     let cat = categories
-  //       .reduce((acc, category) => {
-  //         if (!acc.includes(category)) {
-  //           acc.push(category)
-  //         }
-  //         return acc
-  //       }, [])
-  //       .join(',')
-  //     let uniquePrice = priceRange
-  //       .reduce((acc, price) => {
-  //         if (!acc.includes(price)) {
-  //           acc.push(price)
-  //         }
-  //         return acc
-  //       }, [])
-  //       .join(',')
-  //     const search = {
-  //       categories: cat,
-  //       priceRange: uniquePrice,
-  //       latitude: center.lat,
-  //       longitude: center.lng
-  //     }
-  //     apiSearch(search)
-  //   }
-  // }, [categories, priceRange, roomUsers])
-
   useEffect(() => {
     if (restaurants.length) {
       getRestaurants(restaurants)
