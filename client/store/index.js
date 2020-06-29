@@ -3,7 +3,7 @@ import {createLogger} from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
-import {LOAD_MESSAGES, CREATE_MESSAGE, LOAD_ROOM, LOAD_ROOMUSERS, ADD_ROOMUSER, UPDATE_USERLOC, INITIALIZE_USER, LOAD_RESTAURANTS, CREATE_RESTAURANT} from './constants'
+import {LOAD_MESSAGES, CREATE_MESSAGE, LOAD_ROOM, LOAD_ROOMUSERS, ADD_ROOMUSER, UPDATE_USERLOC, INITIALIZE_USER, LOAD_RESTAURANTS, CREATE_RESTAURANT, LOAD_ROOM_RESTAURANTS} from './constants'
 
 const messageReducer = (state = [], action) => {
   switch (action.type) {
@@ -34,6 +34,8 @@ const roomReducer = (state = [], action) => {
   switch (action.type) {
     case LOAD_ROOM:
       return action.room
+    case LOAD_ROOM_RESTAURANTS:
+        return action.room
     default:
       return state
   }

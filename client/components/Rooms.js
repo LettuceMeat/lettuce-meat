@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {findRestaurants} from '../hooks/findRestaurants'
+// import {findRestaurants} from '../hooks/findRestaurants'
 import {CATEGORIES} from '../constants/categoryPreferences'
 import findLocation from '../hooks/getLocation'
 import RestaurantCard from './RestaurantCard'

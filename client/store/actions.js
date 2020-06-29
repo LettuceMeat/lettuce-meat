@@ -9,6 +9,7 @@ import {
     ADD_ROOMUSER,
     UPDATE_USERLOC,
     INITIALIZE_USER,
+    LOAD_ROOM_RESTAURANTS
 } from './constants'
 
 const loadMessages = messages => ({type: LOAD_MESSAGES, messages})
@@ -18,6 +19,7 @@ const loadRestaurants = restaurants => ({type: LOAD_RESTAURANTS, restaurants})
 const createRestaurant = restaurant => ({type: CREATE_RESTAURANT, restaurant})
 
 const loadRoom = room => ({type: LOAD_ROOM, room})
+const loadRoomRestaurants = room => ({type: LOAD_ROOM_RESTAURANTS, room})
 
 const loadRoomUsers = roomUsers => ({type: LOAD_ROOMUSERS, roomUsers})
 const addRoomUser = roomUser => ({type: ADD_ROOMUSER, roomUser})
@@ -38,4 +40,5 @@ export {
     addRoomUser,
     updateUserLoc,
     initUser,
+    loadRoomRestaurants
 }

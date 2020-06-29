@@ -22,3 +22,21 @@ router.post('/:roomId', async (req, res, next) => {
     next(error)
   }
 })
+
+router.get('/:roomId/restaurants', async (req, res, next) => {
+  try {
+    let roomRes = await Room.findAll({
+      where: {name: req.params.roomId}
+    })
+    // const [apiSearch] = findRestaurants()
+    // console.log(apiSearch)
+    // get room preferences array
+    // get room price array
+    // restaurants = yelpSearch(preferences, price)
+    // res.send(restaurants)
+    res.json(roomRes)
+    res.sendStatus(201)
+  } catch (error) {
+    next(error)
+  }
+})

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useParams} from 'react-router-dom'
 import {thunkLoadMessages, thunkLoadRoomUsers} from '../store/thunks'
-import {createMessage, initUser} from '../store/actions'
+import {createMessage, initUser, loadRoomRestaurants} from '../store/actions'
 import findLocation from '../hooks/getLocation'
 import socket from '../socket'
 import ChatRoom from './ChatRoom'
@@ -15,10 +15,12 @@ export default function RoomMaster() {
   const [center, setCenter] = useState({lat: 0, lng: 0})
   const [restaurantData, setRestaurantData] = useState([])
   const user = useSelector(state => state.user)
+  const room = useSelector(state => state.room)
   const roomUsers = useSelector(state => state.roomUsers)
   const dispatch = useDispatch()
   const {roomId} = useParams()
   const [getLocation, location] = findLocation()
+
 
   //BUG sometimes initialize loads before load users
 
@@ -42,6 +44,10 @@ export default function RoomMaster() {
     socket.on('roomUserReceive', user => {
       dispatch(initUser(user))
     })
+    socket.on('resultsReceive', restaurants => {
+      setRestaurantData(restaurants)
+    })
+
 
     return () => {
       inRoom = false
@@ -83,11 +89,12 @@ export default function RoomMaster() {
   return (
     <div>
       <div className="mapContainer">
-        {roomUsers.length && <GoogleMapCard userData={roomUsers} />}
+        {roomUsers.length && <GoogleMapCard userData={roomUsers} restaurantData={restaurantData} />}
       </div>
       <div className="chatContainer">
         <ChatRoom roomId={roomId} sendMessage={sendMessage} />
         <Preferences
+          roomId={roomId}
           roomUsers={roomUsers}
           center={center}
           getRestaurants={getRestaurants}
