@@ -69,6 +69,7 @@ export const ChatRoom = props => {
                 variant="outlined"
                 value={content}
                 onChange={ev => setText(ev.target.value)}
+                id="textBox"
               />
             </form>
           </div>
