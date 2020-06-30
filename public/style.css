@@ -387,16 +387,17 @@ textarea {
 }
 #userUpdateForm {
   display: flex;
-  /* width: 50%; */
   flex-direction: column;
-  background-color: aliceblue;
+}
+#userUpdateForm > h5 {
+  align-self: center;
 }
 #userUpdateForm > * {
   margin: 10px;
 }
 #userUpdateForm > button {
   border: none;
-  background-color: rgb(17, 82, 147);
+  background: linear-gradient(180deg, #004732, #548773);
   color: white;
   height: 30px;
 }
@@ -409,3 +410,31 @@ textarea {
   max-height: 25rem;
   overflow: scroll;
 }
+
+#roomCardWrapper {
+  color: rgb(20, 82, 147);
+  text-align: center;
+  padding: 10px;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2), 0 2.5px 4px 0 rgba(0, 0, 0, 0.19);
+  height: 15rem;
+  overflow: scroll;
+  margin: 2rem;
+  background: linear-gradient(180deg, #004732, #548773)
+}
+#roomCardWrapper > a:link, a:hover, a:active, a:visited {
+  color: white;
+}
+#roomCardWrapper  > div{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 10px;
+  margin: 10px;
+}
+#roomCardDiv {
+  text-align: center;
+}
+/* .roomCard {
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2), 0 2.5px 4px 0 rgba(0, 0, 0, 0.19);
+  margin: 2rem;
+} */
