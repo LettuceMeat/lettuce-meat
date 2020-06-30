@@ -6,7 +6,7 @@ import {auth} from '../store'
 import {makeStyles} from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-import Link from '@material-ui/core/Link'
+// import Link from '@material-ui/core/Link'
 
 /**
  * COMPONENT
@@ -88,9 +88,9 @@ const AuthForm = props => {
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <Link href="/auth/google" component="button" variant="body2">
+      {/* <Link href="/auth/google" component="button" variant="body2">
         {displayName} with Google
-      </Link>
+      </Link> */}
       {/* <a href="/auth/google">{displayName} with Google</a> */}
     </div>
   )
