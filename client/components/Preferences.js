@@ -20,13 +20,13 @@ const useStyles = makeStyles(theme => ({
     // minWidth: 120
   },
   preferences: {
-    width: '25%'
+    margin: '1rem'
   }
 }))
 
 const Preferences = ({roomUsers, center, getRestaurants, roomId}) => {
-  const [categories, setCategories] = useState([])
-  const [priceRange, setPriceRange] = useState([])
+  const [category, setCategories] = useState(`-- types --`)
+  const [price, setPriceRange] = useState(`1`)
   const user = useSelector(state => state.user)
   const [apiSearch, restaurants, error] = findRestaurants()
 
@@ -34,10 +34,10 @@ const Preferences = ({roomUsers, center, getRestaurants, roomId}) => {
   //When all users select their preference, make the api call
 
   const handleCategoriesChange = ev => {
-    setCategories(() => [...categories, ev.target.value])
+    setCategories(() => ev.target.value)
   }
   const handlePriceRangeChange = ev => {
-    setPriceRange(() => [...priceRange, ev.target.value])
+    setPriceRange(() => ev.target.value)
   }
 
   useEffect(() => {
@@ -48,8 +48,8 @@ const Preferences = ({roomUsers, center, getRestaurants, roomId}) => {
 
   const sendPreference = () => {
   const preference = {
-    cuisine: categories[0],
-    moneys: priceRange[0],
+    cuisine: category,
+    moneys: price,
     center: center
   }
   axios.post(`/api/submit/${roomId}/${user.id}`, {preference})
@@ -60,7 +60,7 @@ const Preferences = ({roomUsers, center, getRestaurants, roomId}) => {
     <form className={styles.preferences} onSubmit={ev => ev.preventDefault()}>
       <FormControl className={styles.formControl}>
         <InputLabel id="input-categories">Cuisine</InputLabel>
-        <Select value="" onChange={handleCategoriesChange}>
+        <Select value={category} onChange={handleCategoriesChange}>
           {CATEGORIES.map((category, idx) => {
             const {value, disabled} = category
             return (
@@ -74,7 +74,7 @@ const Preferences = ({roomUsers, center, getRestaurants, roomId}) => {
       </FormControl>
       <FormControl className={styles.formControl}>
         <InputLabel id="input-price">Price Range</InputLabel>
-        <Select value="" onChange={handlePriceRangeChange}>
+        <Select value={price} onChange={handlePriceRangeChange}>
           <MenuItem value="1">$</MenuItem>
           <MenuItem value="2">$$</MenuItem>
           <MenuItem value="3">$$$</MenuItem>
