@@ -26,13 +26,19 @@ class GoogleMapCard extends Component {
   render() {
     const {restaurantData, userData} = this.props
 
-    const points = userData.map(user => {
+    const userPoints = userData.map(user => {
       return {lat: user.lat*1, lng: user.lng*1}
+    })
+    const restaurantPoints = restaurantData.map(restaurant => {
+      return {lat: restaurant.coordinates.latitude*1, lng: restaurant.coordinates.longitude*1}
     })
 
     const bounds = new this.props.google.maps.LatLngBounds();
-    for (let i = 0; i < points.length; i++) {
-      bounds.extend(points[i]);
+    for (let i = 0; i < userPoints.length; i++) {
+      bounds.extend(userPoints[i]);
+    }
+    for (let i = 0; i < restaurantPoints.length; i++) {
+      bounds.extend(restaurantPoints[i]);
     }
 
     return (
@@ -77,7 +83,7 @@ class GoogleMapCard extends Component {
                 name={restaurant.name}
                 position={coordinates}
                 icon={{
-                  url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+                  url: 'http://maps.google.com/mapfiles/ms/icons/orange-dot.png'
                 }}
               />
             )

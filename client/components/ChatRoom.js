@@ -18,14 +18,10 @@ export const ChatRoom = props => {
   const classes = useStyles()
   const {messages, loggedUser} = props
   const [content, setText] = useState('')
-
   return (
-    <React.Fragment>
-      <CssBaseline />
-      <Container maxWidth="sm" style={{margin: 0}}>
-        <Typography component="div" style={{backgroundColor: '#a9c7b5'}}>
+        <div component="div" style={{backgroundColor: '#a9c7b5'}}>
           <div id="chatBox">
-            <ul>
+            <ul id="scrollBox" style={{margin: '0rem'}}>
               {messages
                 ? messages.map(message => {
                     return (
@@ -73,9 +69,7 @@ export const ChatRoom = props => {
               />
             </form>
           </div>
-        </Typography>
-      </Container>
-    </React.Fragment>
+        </div>
   )
 }
 

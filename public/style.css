@@ -56,7 +56,7 @@
 }
 
 .chatContainer {
-  display: flex;
+  margin: 1rem 1rem 1rem 0;
   width: 100%;
 }
 
@@ -225,6 +225,7 @@ html {
 body {
   overscroll-behavior-y: none;
   overscroll-behavior-x: none;
+  overflow-x: hidden;
   background-color: rgb(216, 216, 216);
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
@@ -239,6 +240,19 @@ code {
 
 .App {
   text-align: center;
+}
+
+.flexRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.chatContainer {
+  flex: 2;
+}
+
+.prefContainer {
+  flex: 1;
 }
 
 .home-button {
@@ -301,7 +315,6 @@ a:active {
   padding: 5px;
 }
 #chatBox > ul {
-  height: 25rem;
   overflow: scroll;
   margin: 2rem;
 }
@@ -316,7 +329,6 @@ a:active {
   list-style-type: none;
   margin: 10px;
   padding: 5px 15px 5px 15px;
-  width: 80%;
 }
 .chatList > .textLeft {
   align-self: flex-start;
@@ -326,7 +338,6 @@ a:active {
   margin: 10px;
   margin-left: -35px;
   padding: 5px 15px 5px 15px;
-  width: 80%;
 }
 .chatList > .avatarRight {
   align-self: flex-end;
@@ -335,7 +346,6 @@ a:active {
   font-size: smaller;
   list-style-type: none;
   margin: -10px 5px 10px 10px;
-  padding: 5px 15px 5px 15px;
 }
 .chatList > .avatarLeft {
   align-self: flex-start;
@@ -344,7 +354,6 @@ a:active {
   font-size: smaller;
   margin: -10px 10px 10px -35px;
   list-style-type: none;
-  padding: 5px 15px 5px 15px;
 }
 .bottomNav {
   align-items: center;
@@ -397,11 +406,11 @@ textarea {
   display: flex;
   justify-content: space-evenly;
 }
-/* #chatBox {
-  margin: 2rem;
-  height: 25rem;
+#chatBox {
+  max-height: 25rem;
   overflow: scroll;
-} */
+}
+
 #roomCardWrapper {
   color: rgb(20, 82, 147);
   text-align: center;

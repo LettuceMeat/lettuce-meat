@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useParams} from 'react-router-dom'
 import {thunkLoadMessages, thunkLoadRoomUsers} from '../store/thunks'
-import {createMessage, initUser, loadRoomRestaurants} from '../store/actions'
+import {createMessage, initUser} from '../store/actions'
 import findLocation from '../hooks/getLocation'
 import socket from '../socket'
 import ChatRoom from './ChatRoom'
@@ -16,14 +16,10 @@ export default function RoomMaster() {
   const [center, setCenter] = useState({lat: 0, lng: 0})
   const [restaurantData, setRestaurantData] = useState([])
   const user = useSelector(state => state.user)
-  const room = useSelector(state => state.room)
   const roomUsers = useSelector(state => state.roomUsers)
   const dispatch = useDispatch()
   const {roomId} = useParams()
   const [getLocation, location] = findLocation()
-
-
-  //BUG sometimes initialize loads before load users
 
   //on mount - load data, join socket room, set up socket to receive
   useEffect(() => {
@@ -36,12 +32,9 @@ export default function RoomMaster() {
     }
     socket.emit('join', roomId)
 
-    axios.post(`/api/messages/${roomId}`, {
-      message: `${user.userName} has joined the room`
-    })
-
     socket.on('roomMessageReceive', content => {
       inRoom && dispatch(createMessage(content))
+      inRoom && updateScroll()
     })
     socket.on('roomUserReceive', user => {
       inRoom && dispatch(initUser(user))
@@ -79,6 +72,7 @@ export default function RoomMaster() {
     }
   }, [user, location])
 
+  //functions to pass down
   const sendMessage = message =>
     axios.post(`/api/messages/${roomId}`, {message})
 
@@ -86,20 +80,30 @@ export default function RoomMaster() {
     setRestaurantData(restaurants)
   }
 
+  //function to keep chat component up to date with messages
+  function updateScroll(){
+    const element = document.getElementById("chatBox");
+    if (element) element.scrollTop = element.scrollHeight;
+  }
+
   return (
     <div>
       <div className="mapContainer">
         {roomUsers.length && <GoogleMapCard userData={roomUsers} restaurantData={restaurantData} />}
       </div>
-      <div className="chatContainer">
-        <ChatRoom roomId={roomId} sendMessage={sendMessage} />
+      <div className="flexRow">
+        <div className="chatContainer">
+          <ChatRoom roomId={roomId} sendMessage={sendMessage} />
+        </div>
+        <div className="prefContainer">
         <Preferences
-          roomId={roomId}
-          roomUsers={roomUsers}
-          center={center}
-          getRestaurants={getRestaurants}
-        />
-      </div>
+            roomId={roomId}
+            roomUsers={roomUsers}
+            center={center}
+            getRestaurants={getRestaurants}
+          />
+          </div>
+        </div>
       <div>
         {restaurantData
           ? restaurantData.map((restaurant, idx) => {
