@@ -41,9 +41,12 @@ const HomePage = () => {
         <AddCircleOutlineRoundedIcon />
         Create Room
       </Button>
-      <Button className={styles.createButtonStyle}>
+      <Button id="joinBtn" className={styles.createButtonStyle}>
         <GroupIcon />
+        <div id="joinBtn">
         <Link to="/join">Join Room</Link>
+
+        </div>
       </Button>
     </div>
   )

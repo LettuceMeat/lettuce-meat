@@ -34,7 +34,7 @@ class Routes extends Component {
 
     return (
       <Switch>
-        <Route exact path="/" component={LandingPage} />
+        <Route exact path="/" component={HomePage} />
         {isLoggedIn && <Route exact path="/room/:roomId?/roomHome" component={RoomMaster} />}
         <Route exact path="/" component={HomePage} />
         <Route exact path="/home" component={HomePage} />

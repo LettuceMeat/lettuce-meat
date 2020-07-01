@@ -296,6 +296,14 @@ a:active {
   text-decoration: none;
 }
 
+#joinBtn > a:link,
+a:visited,
+a:hover,
+a:active {
+  color: rgb(44, 105, 85);
+  text-decoration: none;
+}
+
 
 #icons {
   align-items: center;
@@ -438,3 +446,10 @@ textarea {
   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2), 0 2.5px 4px 0 rgba(0, 0, 0, 0.19);
   margin: 2rem;
 } */
+#joinBtn > a:link,
+a:visited,
+a:hover,
+a:active {
+  color: rgb(44, 105, 85);
+  text-decoration: none;
+}
