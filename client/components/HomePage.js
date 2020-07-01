@@ -35,18 +35,18 @@ const HomePage = () => {
     history.push(`/room/${roomCode}`)
   }
 
+  const joinRoom = () => history.push('/join')
+
   return (
     <div className={styles.container}>
       <Button className={styles.createButtonStyle} onClick={() => createRoom()}>
         <AddCircleOutlineRoundedIcon />
         Create Room
       </Button>
-      <Button id="joinBtn" className={styles.createButtonStyle}>
+      <Button className={styles.createButtonStyle} onClick={() => joinRoom()}>
         <GroupIcon />
-        <div id="joinBtn">
-        <Link to="/join">Join Room</Link>
-
-        </div>
+        {/* <Link to="/join">Join Room</Link> */}
+        Join Room
       </Button>
     </div>
   )
