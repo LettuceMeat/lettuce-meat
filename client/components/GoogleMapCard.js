@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Map, Marker, GoogleApiWrapper} from 'google-maps-react'
 import {googleKey} from '../../secrets'
+const apiKey = process.env.GOOGLE_API_KEY || googleKey
 const styles = require('../../GoogleMapStyles.json')
 
 class GoogleMapCard extends Component {
@@ -94,5 +95,5 @@ class GoogleMapCard extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: googleKey
+  apiKey: apiKey
 })(GoogleMapCard)
