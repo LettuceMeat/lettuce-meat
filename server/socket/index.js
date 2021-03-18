@@ -21,7 +21,6 @@ const setup = io => {
     })
 
     socket.on('disconnect', () => {
-      //put request the user DOES NOT belongsTo(roomId)
       console.log(`Connection ${socket.id} has left the building`)
     })
   })
