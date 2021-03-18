@@ -12,6 +12,9 @@ const db = new Sequelize(
     dialectOptions: {
       ssl: true,
     }, //removed ssl
+    ssl: {
+      rejectUnauthorized: false
+    }
   }
 )
 module.exports = db
