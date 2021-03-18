@@ -9,7 +9,9 @@ const db = new Sequelize(
     logging: false,
     dialect: 'postgres',
     protocol: 'postgres',
-    dialectOptions: {}, //removed ssl
+    dialectOptions: {
+      ssl: true,
+    }, //removed ssl
   }
 )
 module.exports = db
