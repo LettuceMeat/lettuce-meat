@@ -68,7 +68,7 @@
     "redux-thunk": "^2.3.0",
     "sequelize": "^5.22.1",
     "socket.io": "^2.3.0",
-    "validator": "^13.1.1",
+    "validator": "^13.7.0",
     "yelp-fusion": "^3.0.0"
   },
   "devDependencies": {
